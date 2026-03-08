@@ -18,6 +18,7 @@
       <a href="#" class="nav-logo">yumo<span class="accent">.</span></a>
       <div class="nav-links">
         <a href="#about">About</a>
+        <a href="#journey">Journey</a>
         <a href="#projects">Projects</a>
         <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
@@ -28,6 +29,7 @@
     </div>
     <div class="mobile-menu" id="mobile-menu">
       <a href="#about">About</a>
+      <a href="#journey">Journey</a>
       <a href="#projects">Projects</a>
       <a href="#skills">Skills</a>
       <a href="#contact">Contact</a>
@@ -36,14 +38,15 @@
 
   <!-- Hero -->
   <section class="hero" id="hero">
-    <div class="container">
+    <canvas id="hero-particles"></canvas>
+    <div class="container hero-content">
       <div class="hero-badge">
         <span class="status-dot"></span>
         Open to opportunities
       </div>
       <h1 class="hero-title">
         I build systems that<br>
-        <span class="gradient-text">think and trade.</span>
+        <span class="gradient-text typewriter" data-text="think and trade."></span>
       </h1>
       <p class="hero-subtitle">
         Software developer specializing in Python, data analysis, and quantitative trading systems. 
@@ -98,7 +101,7 @@
             <div class="stat-desc">backtested & validated</div>
           </div>
           <div class="stat-card">
-            <div class="stat-number">38</div>
+            <div class="stat-number">45</div>
             <div class="stat-label">Tests Passing</div>
             <div class="stat-desc">automated test suite</div>
           </div>
@@ -112,8 +115,53 @@
     </div>
   </section>
 
+  <!-- Journey / Timeline -->
+  <section class="section section-alt" id="journey">
+    <div class="container">
+      <div class="section-label">Experience</div>
+      <h2 class="section-title timeline-header">The Journey</h2>
+      <div class="timeline">
+        <div class="timeline-line"></div>
+        <div class="timeline-entries">
+          <div class="timeline-entry">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <div class="timeline-step">01</div>
+              <h3>Travel Agent</h3>
+              <p>Managing logistics, complex itineraries, and client relationships across multiple time zones. Built sharp problem-solving skills under real pressure — coordinating dozens of moving parts daily.</p>
+            </div>
+          </div>
+          <div class="timeline-entry">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <div class="timeline-step">02</div>
+              <h3>Self-Teaching Phase</h3>
+              <p>Dove into Python, data analysis, and APIs. No bootcamp, no hand-holding — just docs, projects, and late nights. Learning by building, not by watching tutorials.</p>
+            </div>
+          </div>
+          <div class="timeline-entry">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <div class="timeline-step">03</div>
+              <h3>First Real Projects</h3>
+              <p>Built a prediction market trading bot (3,000+ lines), a Montreal housing data pipeline with 5 visualizations, and an automated job scraper. Real code, real systems, real results.</p>
+            </div>
+          </div>
+          <div class="timeline-entry">
+            <div class="timeline-dot active"></div>
+            <div class="timeline-card active">
+              <div class="timeline-step">04</div>
+              <h3>Ready for Tech</h3>
+              <p>5,700+ lines of production Python, 45 automated tests, CI/CD pipelines, Docker containers. Three shipped projects on GitHub. Looking for the right team to grow with.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Projects -->
-  <section class="section section-alt" id="projects">
+  <section class="section" id="projects">
     <div class="container">
       <div class="section-label">Projects</div>
       <h2 class="section-title">Featured Work</h2>
@@ -134,7 +182,7 @@
         <p class="project-featured-desc">
           A paper trading bot for prediction markets with 10 quantitative strategies, 
           a full backtesting engine, and automated daily reports. Built from scratch — 
-          ~3,000 lines of Python, 38 tests passing, production-grade architecture.
+          ~3,000 lines of Python, 45 tests passing, production-grade architecture.
         </p>
         <div class="project-features">
           <div class="feature">
@@ -155,7 +203,7 @@
           </div>
           <div class="feature">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            38 automated tests passing
+            45 automated tests passing
           </div>
           <div class="feature">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -203,7 +251,7 @@
   </section>
 
   <!-- Skills -->
-  <section class="section" id="skills">
+  <section class="section section-alt" id="skills">
     <div class="container">
       <div class="section-label">Skills</div>
       <h2 class="section-title">What I Work With</h2>
@@ -253,7 +301,7 @@
   </section>
 
   <!-- Contact -->
-  <section class="section section-alt" id="contact">
+  <section class="section" id="contact">
     <div class="container">
       <div class="contact-block">
         <div class="section-label">Contact</div>
