@@ -1,4 +1,84 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>Project Notes | Yumo Xu</title><link rel="stylesheet" href="style.css"></head>
-<body class="case-page"><nav class="nav case-nav"><div class="nav-inner"><a href="index.html" class="nav-logo">yumo<span class="accent">.</span></a><a href="index.html#projects" class="case-back">← Projects</a></div></nav>
-<main class="case-main"><div class="container case-container"><header class="case-hero"><div class="section-label">PROJECT UPDATE</div><h1>My projects have evolved<span class="case-dot">.</span></h1><p class="case-lede">This older link originally documented trading systems that are no longer operating.</p></header><article class="case-article"><section><h2>Current focus</h2><p>My flagship work is now Network Lab, an aviation route-screening research project built around traceable data, model checks and clear limitations.</p><p><a class="case-inline-link" href="network-lab.html">Read the Network Lab case study →</a></p></section><section><h2>Historical projects</h2><p>Autonomous Trading System and Polymarket Autopilot remain documented on GitHub as historical engineering and research projects. Their operation or results should not be interpreted as evidence of current live trading or a verified profitable strategy.</p><div class="case-source-links"><a href="https://github.com/yumorepos/autonomous-trading-system" target="_blank" rel="noopener noreferrer">ATS repository ↗</a><a href="https://github.com/yumorepos/polymarket-autopilot" target="_blank" rel="noopener noreferrer">Polymarket repository ↗</a></div></section></article></div></main><footer class="footer"><div class="container">Yumo Xu · 2026</div></footer></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Autonomous Trading System: a Python engineering and research project documenting testing, execution controls, analytical limitations, and an evidence-based shutdown.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Autonomous Trading System | Engineering Case Study — Yumo Xu">
+  <meta property="og:description" content="Building, auditing, and closing a Python trading research platform when the evidence did not justify continuing.">
+  <meta property="og:url" content="https://yumorepos.github.io/case-study.html">
+  <title>Autonomous Trading System | Engineering Case Study — Yumo Xu</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="case-page">
+  <nav class="nav case-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">yumo<span class="accent">.</span></a>
+      <a href="index.html#projects" class="case-back">← All projects</a>
+    </div>
+  </nav>
+  <main class="case-main">
+    <div class="container case-container">
+      <header class="case-hero">
+        <div class="section-label">ENGINEERING CASE STUDY · ARCHIVED</div>
+        <h1>Building a system.<br>Testing its limits<span class="case-dot">.</span></h1>
+        <p class="case-lede">I built and audited a Python trading research platform, found where its assumptions broke down, and eventually decided that the evidence did not justify operating it as a business.</p>
+        <div class="case-tags">
+          <span class="tag">Python</span><span class="tag">pytest</span><span class="tag">APIs</span><span class="tag">Risk controls</span><span class="tag">Research integrity</span>
+        </div>
+        <div class="case-actions">
+          <a class="btn btn-primary" href="https://github.com/yumorepos/autonomous-trading-system" target="_blank" rel="noopener noreferrer">View historical code ↗</a>
+          <a class="btn btn-secondary" href="network-lab.html">See aviation flagship →</a>
+        </div>
+      </header>
+      <div class="case-snapshot">
+        <div><span class="case-mini-label">PROJECT</span><strong>Quantitative research and Python infrastructure</strong></div>
+        <div><span class="case-mini-label">OUTCOME</span><strong>Not a validated, scalable trading business</strong></div>
+        <div><span class="case-mini-label">STATUS</span><strong>Automated services wound down · June 2026</strong></div>
+      </div>
+      <article class="case-article">
+        <section>
+          <h2>What I was trying to solve</h2>
+          <p>Funding-rate strategies can look profitable in historical data. I wanted to know whether the apparent opportunity survived real trading costs, execution uncertainty, concentrated samples, and different market conditions — and whether the surrounding software could fail safely.</p>
+          <p>The project evolved into a research and execution system with exchange integrations, backtests, simulated and limited real trading, ledgers, alerts, automated tests, and documented risk controls.</p>
+        </section>
+        <section>
+          <h2>How I approached the problem</h2>
+          <div class="case-process">
+            <div><span>01 / BUILD</span><strong>Implement the workflow</strong><small>Data ingestion, signal evaluation, simulation, and controlled execution components.</small></div>
+            <div><span>02 / CHALLENGE</span><strong>Audit the evidence</strong><small>Check concentration, leverage, cost assumptions, trade records, and failure cases.</small></div>
+            <div><span>03 / DECIDE</span><strong>Respect the result</strong><small>Narrow unsupported claims, disarm trading, and preserve the research.</small></div>
+          </div>
+        </section>
+        <section>
+          <h2>What the audits found</h2>
+          <p><strong>The headline backtest was not generalizable.</strong> Twenty of its first twenty-three trades came from one asset. A later test also showed that leveraged live-exit rules and the original unleveraged backtest exit assumptions were not equivalent.</p>
+          <p><strong>Software controls needed operational validation.</strong> Real execution uncovered issues including incomplete close handling, a misrecorded losing trade, and lost alerts. Those findings informed code and observability changes.</p>
+          <p><strong>A separate carry strategy was narrower than it first appeared.</strong> Historical spot/perpetual funding-carry research suggested positive funding income, but the funding was decaying, liquidity limited capacity, and its Sharpe statistic did not withstand multiple-testing adjustment. The later carry executor remained dry-run and did not implement live order placement.</p>
+        </section>
+        <section class="case-finding">
+          <h2>The result I am comfortable claiming</h2>
+          <p>I demonstrated system design, testing, auditability, and a willingness to retire an idea when its practical economics did not work. I <strong>did not establish a repeatable or scalable profitable trading strategy</strong>. On June 29, 2026, the automated trading services were wound down and the records were preserved.</p>
+        </section>
+        <section class="case-method">
+          <h2>Important evidence limits</h2>
+          <p>The public GitHub repository shows an earlier code snapshot; the later local carry-only revision and shutdown records were not pushed there. The project is no longer an active trading service. Historical performance estimates are not forecasts or investment recommendations.</p>
+          <div class="case-source-links">
+            <a href="https://github.com/yumorepos/autonomous-trading-system" target="_blank" rel="noopener noreferrer">Historical repository ↗</a>
+            <a href="https://yumorepos.github.io/network-lab.html">Network Lab case study →</a>
+          </div>
+        </section>
+      </article>
+      <div class="case-bottom-cta">
+        <h2>Interested in practical analytics?</h2>
+        <a href="index.html#contact" class="btn btn-secondary">Get in touch →</a>
+      </div>
+    </div>
+  </main>
+  <footer class="footer"><div class="container">Yumo Xu · 2026</div></footer>
+</body>
+</html>
