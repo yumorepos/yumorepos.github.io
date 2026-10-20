@@ -1,442 +1,291 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yumo — Developer Portfolio</title>
-  <meta name="description" content="Yumo — software developer specializing in Python, data analysis, automation, and quantitative trading systems.">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Yumo Xu | Aviation Operations &amp; Data Analytics</title>
+<meta content="Yumo Xu — aviation operations and data analytics portfolio. Projects in airline route screening, Python, SQL, and decision-support systems." name="description"/>
+<!-- Open Graph / Social Sharing -->
+<meta content="website" property="og:type"/>
+<meta content="https://yumorepos.github.io/" property="og:url"/>
+<meta content="Yumo Xu | Aviation Operations &amp; Data Analytics" property="og:title"/>
+<meta content="Aviation and operations experience meets practical Python, SQL, and reproducible data analytics." property="og:description"/>
 
-  <!-- Open Graph / Social Sharing -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://yumorepos.github.io/">
-  <meta property="og:title" content="Yumo — Developer Portfolio">
-  <meta property="og:description" content="Software developer specializing in Python, data analysis, and quantitative trading systems. Self-taught, project-driven, always shipping.">
-  <meta property="og:image" content="https://yumorepos.github.io/og-image.png">
+<!-- Twitter Card -->
+<meta content="summary" name="twitter:card"/>
+<meta content="Yumo Xu | Aviation Operations &amp; Data Analytics" name="twitter:title"/>
+<meta content="Projects in airline route screening, Python, SQL, and operational decision support." name="twitter:description"/>
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Yumo — Developer Portfolio">
-  <meta name="twitter:description" content="Software developer specializing in Python, data analysis, and quantitative trading systems. Self-taught, project-driven, always shipping.">
-  <meta name="twitter:image" content="https://yumorepos.github.io/og-image.png">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="style.css" rel="stylesheet"/>
+<link href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;text y='.9em' font-size='90'&gt;⚡&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
 </head>
 <body>
-  <!-- Nav -->
-  <nav class="nav" id="nav">
-    <div class="nav-inner">
-      <a href="#" class="nav-logo">yumo<span class="accent">.</span></a>
-      <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#journey">Journey</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
-      </div>
-      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-    <div class="mobile-menu" id="mobile-menu">
-      <a href="#about">About</a>
-      <a href="#journey">Journey</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </nav>
-
-  <!-- Hero -->
-  <section class="hero" id="hero">
-    <canvas id="hero-particles"></canvas>
-    <div class="container hero-content">
-      <div class="hero-badge">
-        <span class="status-dot"></span>
+<!-- Nav -->
+<nav class="nav" id="nav">
+<div class="nav-inner">
+<a class="nav-logo" href="#">yumo<span class="accent">.</span></a>
+<div class="nav-links">
+<a href="#about">About</a>
+<a href="#journey">Journey</a>
+<a href="#projects">Projects</a>
+<a href="#skills">Skills</a>
+<a href="#contact">Contact</a>
+</div>
+<button aria-label="Menu" class="mobile-menu-btn" id="mobile-menu-btn">
+<span></span><span></span><span></span>
+</button>
+</div>
+<div class="mobile-menu" id="mobile-menu">
+<a href="#about">About</a>
+<a href="#journey">Journey</a>
+<a href="#projects">Projects</a>
+<a href="#skills">Skills</a>
+<a href="#contact">Contact</a>
+</div>
+</nav>
+<!-- Hero -->
+<section class="hero" id="hero">
+<canvas id="hero-particles"></canvas>
+<div class="container hero-content">
+<div class="hero-badge">
+<span class="status-dot"></span>
         Open to opportunities
       </div>
-      <h1 class="hero-title">
-        I build systems that<br>
-        <span class="gradient-text typewriter" data-text="think and trade."></span>
-      </h1>
-      <p class="hero-subtitle">
-        Software developer specializing in Python, data analysis, and quantitative trading systems. 
-        Former travel agent who taught himself to code — shipped 7 real projects including a quantitative trading system and 3 live deployments.
-      </p>
-      <div class="hero-actions">
-        <a href="#projects" class="btn btn-primary">View my work</a>
-        <a href="Yumo-Xu-Resume.pdf" target="_blank" rel="noopener" class="btn btn-secondary">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
-          Resume
-        </a>
-        <a href="https://github.com/yumorepos" target="_blank" rel="noopener" class="btn btn-secondary">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+<h1 class="hero-title">
+        I build systems that<br/>
+<span class="gradient-text typewriter" data-text="turn data into decisions."></span>
+</h1>
+<p class="hero-subtitle">Corporate travel consultant with aviation management training. I build Python and data-analytics projects focused on operational decisions, data quality, and clear evidence.</p>
+<div class="hero-actions">
+<a class="btn btn-primary" href="#projects">View my work</a>
+<a class="btn btn-secondary" href="https://github.com/yumorepos" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 24 24" width="20"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path></svg>
           GitHub
         </a>
-      </div>
-    </div>
-    <div class="hero-gradient"></div>
-  </section>
-
-  <!-- About -->
-  <section class="section" id="about">
-    <div class="container">
-      <div class="section-label">About</div>
-      <div class="about-grid">
-        <div class="about-content">
-          <h2>From booking flights to<br>building trading bots.</h2>
-          <p>
-            I spent years as a travel agent — coordinating logistics, managing complex itineraries, 
-            and solving problems under pressure. Good skills, wrong industry.
-          </p>
-          <p>
-            I started teaching myself to code because I wanted to build things, not just use them. 
-            What began with Python scripts quickly evolved into data analysis, API integrations, 
-            and eventually a full quantitative trading system for prediction markets.
-          </p>
-          <p>
-            I didn't take the traditional path into tech. I took the harder one — self-taught, 
-            project-driven, learning by building real systems that actually work. 
-            That's the kind of developer I am: resourceful, relentless, and always shipping.
-          </p>
-        </div>
-        <div class="about-stats">
-          <div class="stat-card">
-            <div class="stat-number">20,000+</div>
-            <div class="stat-label">Lines of Code</div>
-            <div class="stat-desc">across 7 projects</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number">14</div>
-            <div class="stat-label">Trading Strategies</div>
-            <div class="stat-desc">backtested & validated</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number">70+</div>
-            <div class="stat-label">Tests Passing</div>
-            <div class="stat-desc">across all projects</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number">100%</div>
-            <div class="stat-label">Self-Taught</div>
-            <div class="stat-desc">project-driven learning</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Journey / Timeline -->
-  <section class="section section-alt" id="journey">
-    <div class="container">
-      <div class="section-label">Experience</div>
-      <h2 class="section-title timeline-header">The Journey</h2>
-      <div class="timeline">
-        <div class="timeline-line"></div>
-        <div class="timeline-entries">
-          <div class="timeline-entry">
-            <div class="timeline-dot"></div>
-            <div class="timeline-card">
-              <div class="timeline-step">01</div>
-              <h3>Travel Agent</h3>
-              <p>Managing logistics, complex itineraries, and client relationships across multiple time zones. Built sharp problem-solving skills under real pressure — coordinating dozens of moving parts daily.</p>
-            </div>
-          </div>
-          <div class="timeline-entry">
-            <div class="timeline-dot"></div>
-            <div class="timeline-card">
-              <div class="timeline-step">02</div>
-              <h3>Self-Teaching Phase</h3>
-              <p>Dove into Python, data analysis, and APIs. No bootcamp, no hand-holding — just docs, projects, and late nights. Learning by building, not by watching tutorials.</p>
-            </div>
-          </div>
-          <div class="timeline-entry">
-            <div class="timeline-dot"></div>
-            <div class="timeline-card">
-              <div class="timeline-step">03</div>
-              <h3>First Real Projects</h3>
-              <p>Built a prediction market paper-trading engine (4,800+ lines, 57 tests), a full-stack aviation analytics platform with real backend, a Montreal housing data pipeline with 5 visualizations, an interactive Streamlit dashboard, and an automated job scraper. Real code, real systems.</p>
-            </div>
-          </div>
-          <div class="timeline-entry">
-            <div class="timeline-dot active"></div>
-            <div class="timeline-card active">
-              <div class="timeline-step">04</div>
-              <h3>Ready for Tech</h3>
-              <p>20,000+ lines of code (Python + TypeScript), 70+ automated tests, CI/CD pipelines, Docker containers. Seven shipped projects on GitHub — including a multi-exchange paper-trading system, a full-stack aviation analytics platform, and a prediction market research engine. Looking for the right team to grow with.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Projects -->
-  <section class="section" id="projects">
-    <div class="container">
-      <div class="section-label">Projects</div>
-      <h2 class="section-title">Featured Work</h2>
-
-      <!-- Featured Project -->
-      <div class="project-featured">
-        <div class="project-featured-header">
-          <div class="project-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-          </div>
-          <div class="project-tags">
-            <span class="tag">Python</span>
-            <span class="tag">Multi-Exchange</span>
-            <span class="tag">AI Trading</span>
-            <span class="tag">Paper Trading</span>
-          </div>
-        </div>
-        <h3 class="project-featured-title">Autonomous Trading System</h3>
-        <p class="project-featured-desc">
-          Multi-exchange paper-trading research system with 7-layer validation architecture. 
-          Targets Hyperliquid (perpetual futures) and Polymarket (prediction markets) with adaptive learning, 
-          3-stage governance, circuit breakers, and human oversight. 16,000+ lines of Python across 11 core scripts, 
-          29 test files, real-time data integrity validation, and comprehensive audit trails. 
-          CI-backed research repository — paper trading only, no live execution.
-        </p>
-        <div class="project-features">
-          <div class="feature">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            7-layer validation architecture (data → execution → human)
-          </div>
-          <div class="feature">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Multi-exchange support (Hyperliquid + Polymarket)
-          </div>
-          <div class="feature">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Adaptive learning (signal weights, regime detection)
-          </div>
-          <div class="feature">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Circuit breakers + kill switch (5 automatic halt conditions)
-          </div>
-          <div class="feature">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Real-time data integrity validation (9 quality checks)
-          </div>
-          <div class="feature">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Full audit trails + incident logging
-          </div>
-        </div>
-        <div class="project-actions">
-          <a href="https://github.com/yumorepos/autonomous-trading-system" target="_blank" rel="noopener" class="btn btn-primary">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-            View on GitHub
-          </a>
-          <a href="https://github.com/yumorepos/autonomous-trading-system#readme" target="_blank" rel="noopener" class="btn btn-secondary">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
-            Documentation
-          </a>
-        </div>
-      </div>
-
-      <!-- More Projects -->
-      <div class="projects-grid">
-        <div class="project-card">
-          <div class="project-card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-          </div>
-          <h4><a href="https://github.com/yumorepos/polymarket-autopilot" target="_blank" rel="noopener">Polymarket Autopilot</a> <span class="tag-sm" style="background:#e74c3c;color:#fff;font-size:0.65rem;vertical-align:middle;">🔴 LIVE</span></h4>
-          <p>Paper-trading research engine for prediction markets — 14 strategies, market ingestion, risk-constrained execution simulation, backtesting, and Streamlit dashboard. 70 tests, strict typing, CI/CD. <a href="https://polymarket-autopilot-ihj7b5nusxnfpyddgnma3y.streamlit.app/" target="_blank" rel="noopener">Try it live →</a></p>
-          <div class="project-card-tags">
-            <span class="tag-sm">Python</span>
-            <span class="tag-sm">SQLite</span>
-            <span class="tag-sm">Quant</span>
-            <span class="tag-sm">CI/CD</span>
-          </div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72"></path><line x1="2" y1="2" x2="22" y2="22"></line><path d="M9.5 2H17a2 2 0 0 1 2 2v7.5"></path></svg>
-          </div>
-          <h4><a href="https://github.com/yumorepos/avgeek-intelligence-lab" target="_blank" rel="noopener">Avgeek Intelligence Lab</a></h4>
-          <p>Aviation intelligence platform with route competitiveness analytics — real FastAPI backend with PostgreSQL/CSV data modes, Next.js frontend, route change detection, airport role metrics, and competition analysis.</p>
-          <div class="project-card-tags">
-            <span class="tag-sm">Next.js</span>
-            <span class="tag-sm">FastAPI</span>
-            <span class="tag-sm">TypeScript</span>
-            <span class="tag-sm">Python</span>
-          </div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72"></path><line x1="2" y1="2" x2="22" y2="22"></line><path d="M9.5 2H17a2 2 0 0 1 2 2v7.5"></path></svg>
-          </div>
-          <h4><a href="https://github.com/yumorepos/flight-discovery" target="_blank" rel="noopener">Flight Discovery Platform</a> <span class="tag-sm" style="background:#e74c3c;color:#fff;font-size:0.65rem;vertical-align:middle;">🔴 LIVE</span></h4>
-          <p>Destination-first flight deal discovery with value scoring across 26+ destinations. Next.js frontend with animated UI, region filters, and deal ranking. FastAPI backend with Kiwi/Amadeus API clients. <a href="https://flight-discovery.vercel.app" target="_blank" rel="noopener">Try it live →</a></p>
-          <div class="project-card-tags">
-            <span class="tag-sm">Next.js</span>
-            <span class="tag-sm">FastAPI</span>
-            <span class="tag-sm">TypeScript</span>
-            <span class="tag-sm">Full-Stack</span>
-          </div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-          </div>
-          <h4><a href="https://github.com/yumorepos/montreal-housing-analysis" target="_blank" rel="noopener">Montreal Housing Analysis</a></h4>
-          <p>Data analysis of Montreal's rental and sales market — statistical modeling, affordability metrics, and 5 visualizations generated from a full data pipeline.</p>
-          <div class="project-card-tags">
-            <span class="tag-sm">Python</span>
-            <span class="tag-sm">pandas</span>
-            <span class="tag-sm">seaborn</span>
-            <span class="tag-sm">Data Analysis</span>
-          </div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
-          </div>
-          <h4><a href="https://montreal-housing-dashboard-rdjsnh9h6wxxlkczmbfbcq.streamlit.app/" target="_blank" rel="noopener">Montreal Housing Dashboard</a> <span class="tag-sm" style="background:#e74c3c;color:#fff;font-size:0.65rem;vertical-align:middle;">🔴 LIVE</span></h4>
-          <p>9 interactive Plotly charts visualizing rental trends, affordability, and vacancy across Montreal boroughs. Synthetic data modeled on CMHC market ranges. Dark theme, Dockerized, deployed on Streamlit Cloud. <a href="https://montreal-housing-dashboard-rdjsnh9h6wxxlkczmbfbcq.streamlit.app/" target="_blank" rel="noopener">Try it live →</a></p>
-          <div class="project-card-tags">
-            <span class="tag-sm">Python</span>
-            <span class="tag-sm">Streamlit</span>
-            <span class="tag-sm">Plotly</span>
-            <span class="tag-sm">Docker</span>
-          </div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-          </div>
-          <h4><a href="https://github.com/yumorepos/job-hunter" target="_blank" rel="noopener">Job Hunter</a></h4>
-          <p>Automated job scraper that pulls from multiple boards via async requests, deduplicates with SQLite, and generates daily markdown digests.</p>
-          <div class="project-card-tags">
-            <span class="tag-sm">Python</span>
-            <span class="tag-sm">httpx</span>
-            <span class="tag-sm">SQLite</span>
-            <span class="tag-sm">Automation</span>
-          </div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-          </div>
-          <h4><a href="https://github.com/yumorepos/queernomads" target="_blank" rel="noopener">QueerNomads</a></h4>
-          <p>A Flask-based community platform for queer digital nomads to share travel experiences. Features user authentication, database integration, and responsive UI. Built as a CS50 final project at Harvard.</p>
-          <div class="project-card-tags">
-            <span class="tag-sm">Python</span>
-            <span class="tag-sm">Flask</span>
-            <span class="tag-sm">SQLite</span>
-            <span class="tag-sm">Full-Stack</span>
-          </div>
-        </div>
-        <!-- Hyperliquid Funding Analyzer, Cross-Market Signals, Canada Housing Intelligence 
-             removed from portfolio: support/research repos that dilute flagship signal -->
-      </div>
-    </div>
-  </section>
-
-  <!-- Skills -->
-  <section class="section section-alt" id="skills">
-    <div class="container">
-      <div class="section-label">Skills</div>
-      <h2 class="section-title">What I Work With</h2>
-      <div class="skills-grid">
-        <div class="skill-group">
-          <h4>Languages & Core</h4>
-          <div class="skill-items">
-            <div class="skill-item">Python</div>
-            <div class="skill-item">JavaScript</div>
-            <div class="skill-item">HTML / CSS</div>
-            <div class="skill-item">SQL</div>
-            <div class="skill-item">Bash</div>
-          </div>
-        </div>
-        <div class="skill-group">
-          <h4>Data & Analysis</h4>
-          <div class="skill-items">
-            <div class="skill-item">Pandas</div>
-            <div class="skill-item">NumPy</div>
-            <div class="skill-item">Data Visualization</div>
-            <div class="skill-item">Statistical Analysis</div>
-            <div class="skill-item">Backtesting</div>
-          </div>
-        </div>
-        <div class="skill-group">
-          <h4>Tools & Infrastructure</h4>
-          <div class="skill-items">
-            <div class="skill-item">Git / GitHub</div>
-            <div class="skill-item">REST APIs</div>
-            <div class="skill-item">Linux / CLI</div>
-            <div class="skill-item">VS Code</div>
-            <div class="skill-item">CI/CD</div>
-          </div>
-        </div>
-        <div class="skill-group">
-          <h4>Domain Knowledge</h4>
-          <div class="skill-items">
-            <div class="skill-item">Quantitative Trading</div>
-            <div class="skill-item">Prediction Markets</div>
-            <div class="skill-item">Finance / Risk</div>
-            <div class="skill-item">Automation</div>
-            <div class="skill-item">System Design</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Writing -->
-  <section class="section" style="padding-top:3rem;padding-bottom:2rem;">
-    <div class="container">
-      <div class="section-label">Writing</div>
-      <h2 class="section-title">Articles</h2>
-      <div style="max-width:700px;">
-        <a href="https://www.linkedin.com/feed/update/urn:li:activity:7436191286480498688/" target="_blank" rel="noopener" style="display:block;padding:1.5rem;background:#1a1a1a;border-radius:8px;border:1px solid #2a2a2a;text-decoration:none;transition:all 0.2s;">
-          <h3 style="color:#00f5d4;margin:0 0 0.5rem 0;font-size:1.25rem;">How I Built a Quantitative Trading Bot as a Self-Taught Developer</h3>
-          <p style="color:#999;margin:0;line-height:1.6;">My journey from travel agent to building a 3,600-line algorithmic trading engine — what I learned about async I/O, strategy design, backtesting, and production-grade architecture.</p>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section class="section" id="contact">
-    <div class="container">
-      <div class="contact-block">
-        <div class="section-label">Contact</div>
-        <h2>Let's connect.</h2>
-        <p>
-          I'm actively looking for opportunities in software development, data analysis, 
-          and quantitative trading. If you're building something interesting — let's talk.
-        </p>
-        <div class="contact-links">
-          <a href="https://github.com/yumorepos" target="_blank" rel="noopener" class="contact-link">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+</div>
+</div>
+<div class="hero-gradient"></div>
+</section>
+<!-- About -->
+<section class="section" id="about">
+<div class="container">
+<div class="section-label">About</div>
+<div class="about-grid">
+<div class="about-content">
+<h2>Aviation operations, data, and software.</h2>
+<p>I work in corporate travel, where complex schedules, changing requirements and careful decision-making are part of everyday operations.</p>
+<p>I studied aviation management and have built independent Python, SQL and web projects to explore route economics, data quality and operational automation.</p>
+<p>The most useful lesson from my projects has been learning when a model does not have enough evidence to support a strong conclusion. I document limitations, test assumptions and correct errors.</p>
+</div>
+<div class="about-stats">
+<div class="stat-card">
+<div class="stat-number">AVI</div>
+<div class="stat-label">Aviation</div>
+<div class="stat-desc">Domain knowledge</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">SQL</div>
+<div class="stat-label">Data</div>
+<div class="stat-desc">Analysis &amp; quality</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">PY</div>
+<div class="stat-label">Python</div>
+<div class="stat-desc">Automation &amp; tooling</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">QA</div>
+<div class="stat-label">Validation</div>
+<div class="stat-desc">Transparent findings</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Journey / Timeline -->
+<section class="section section-alt" id="journey">
+<div class="container">
+<div class="section-label">Experience</div>
+<h2 class="section-title timeline-header">The Journey</h2>
+<div class="timeline">
+<div class="timeline-line"></div>
+<div class="timeline-entries">
+<div class="timeline-entry">
+<div class="timeline-dot"></div>
+<div class="timeline-card">
+<div class="timeline-step">01</div>
+<h3>Corporate travel operations</h3>
+<p>Sabre, Amadeus, itinerary changes, client support and real operational constraints.</p>
+</div>
+</div>
+<div class="timeline-entry">
+<div class="timeline-dot"></div>
+<div class="timeline-card">
+<div class="timeline-step">02</div>
+<h3>Aviation and analytics foundation</h3>
+<p>Aviation management training plus self-directed Python, SQL and data visualization.</p>
+</div>
+</div>
+<div class="timeline-entry">
+<div class="timeline-dot"></div>
+<div class="timeline-card">
+<div class="timeline-step">03</div>
+<h3>Built and audited systems</h3>
+<p>Developed airline route-screening, data pipelines, backtesting and risk-controlled software projects.</p>
+</div>
+</div>
+<div class="timeline-entry">
+<div class="timeline-dot active"></div>
+<div class="timeline-card active">
+<div class="timeline-step">04</div>
+<h3>Focused next step</h3>
+<p>Applying operations experience and data engineering skills to aviation operations analytics and technical operations roles.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Projects -->
+<section class="section" id="projects">
+<div class="container">
+<div class="section-label">Projects</div>
+<h2 class="section-title">Selected Projects</h2>
+<!-- Featured Project -->
+<div class="project-featured">
+<div class="project-featured-header">
+<div class="project-icon">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" x2="12" y1="22.08" y2="12"></line></svg>
+</div>
+<div class="project-tags">
+<span class="tag">Python</span>
+<span class="tag">DuckDB</span>
+<span class="tag">Aviation</span>
+<span class="tag">Research</span>
+</div>
+</div>
+<h3 class="project-featured-title">Network Lab | Airline Route Screening</h3>
+<p class="project-featured-desc">I built a Python and DuckDB workflow that combines public aviation and economic data to screen possible airline routes under explicit assumptions. After finding and fixing material data-unit and competitor-mapping errors, I tested it against a simpler demand-only baseline. The result is an auditable research tool with clearly documented limits, not a claim of proven route prediction.</p>
+<div class="project-features">
+<div class="feature"><svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg> Public-data ingestion and reconciliation</div>
+<div class="feature"><svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg> Carrier and market competition reconstruction</div>
+<div class="feature"><svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg> Fixed-gauge, predefined schedule screening</div>
+<div class="feature"><svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg> Documented data-grain and mapping corrections</div>
+<div class="feature"><svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg> Historical replay against a demand baseline</div>
+<div class="feature"><svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg> Clear limits on predictive resolution</div>
+</div>
+<div class="project-actions">
+<a class="btn btn-primary" href="network-lab.html">Read the case study</a>
+<a class="btn btn-secondary" href="https://github.com/yumorepos/network-lab" rel="noopener" target="_blank">View source on GitHub ↗</a>
+</div><p class="featured-evidence">Research scope and caveats: <a href="https://github.com/yumorepos/network-lab/blob/main/docs/FINAL_SCOPE_CONTRACT.md" rel="noopener noreferrer" target="_blank">scope contract ↗</a></p>
+</div>
+<!-- More Projects -->
+<div class="projects-grid"><div class="project-card"><div class="project-card-icon">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+</div><h4><a href="https://github.com/yumorepos/autonomous-trading-system" rel="noopener" target="_blank">Autonomous Trading System</a></h4><p>Historical execution and risk-control engineering. Small-scale real-money testing occurred, but no scalable edge was established; operations wound down in June 2026.</p><div class="project-card-tags"><span class="tag-sm">Python</span><span class="tag-sm">Risk controls</span><span class="tag-sm">Historical</span></div></div><div class="project-card"><div class="project-card-icon">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+</div><h4><a href="https://github.com/yumorepos/fleet-tracker" rel="noopener" target="_blank">Fleet Tracker</a></h4><p>Aviation fleet-history and data-quality project using collectors, parquet-style storage and aircraft-level checks. Some integrations are still in progress.</p><div class="project-card-tags"><span class="tag-sm">Aviation</span><span class="tag-sm">Python</span><span class="tag-sm">Data Engineering</span></div></div><div class="project-card"><div class="project-card-icon">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+</div><h4><a href="https://github.com/yumorepos/job-hunter" rel="noopener" target="_blank">Job Hunter</a></h4><p>Python job-post normalization, SQLite deduplication and scoring. Demonstrates pragmatic automation; current source reliability needs regular checks.</p><div class="project-card-tags"><span class="tag-sm">Python</span><span class="tag-sm">SQLite</span><span class="tag-sm">Automation</span></div></div><div class="project-card"><div class="project-card-icon">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+</div><h4><a href="https://github.com/yumorepos/polymarket-autopilot" rel="noopener" target="_blank">Polymarket Autopilot (archived)</a></h4><p>Prediction-market research and testing infrastructure. A June 2026 independent review overturned an apparent statistical finding, and the project was archived.</p><div class="project-card-tags"><span class="tag-sm">Python</span><span class="tag-sm">Testing</span><span class="tag-sm">Research</span></div></div></div>
+</div>
+</section>
+<!-- Skills -->
+<section class="section section-alt" id="skills">
+<div class="container">
+<div class="section-label">Skills</div>
+<h2 class="section-title">What I Work With</h2>
+<div class="skills-grid">
+<div class="skill-group">
+<h4>Languages &amp; Core</h4>
+<div class="skill-items">
+<div class="skill-item">Python</div>
+<div class="skill-item">JavaScript</div>
+<div class="skill-item">HTML / CSS</div>
+<div class="skill-item">SQL</div>
+<div class="skill-item">Bash</div>
+</div>
+</div>
+<div class="skill-group">
+<h4>Data &amp; Analysis</h4>
+<div class="skill-items">
+<div class="skill-item">Pandas</div>
+<div class="skill-item">NumPy</div>
+<div class="skill-item">Data Visualization</div>
+<div class="skill-item">Statistical Analysis</div>
+<div class="skill-item">Reproducible Analysis</div>
+</div>
+</div>
+<div class="skill-group">
+<h4>Tools &amp; Infrastructure</h4>
+<div class="skill-items">
+<div class="skill-item">Git / GitHub</div>
+<div class="skill-item">REST APIs</div>
+<div class="skill-item">Linux / CLI</div>
+<div class="skill-item">VS Code</div>
+<div class="skill-item">CI/CD</div>
+</div>
+</div>
+<div class="skill-group">
+<h4>Domain Knowledge</h4>
+<div class="skill-items">
+<div class="skill-item">Travel Operations</div>
+<div class="skill-item">Airline Route Screening</div>
+<div class="skill-item">Sabre / Amadeus</div>
+<div class="skill-item">Data Quality</div>
+<div class="skill-item">Decision Support</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Writing -->
+<section class="section" style="padding-top:3rem;padding-bottom:2rem;">
+<div class="container">
+<div class="section-label">Writing</div>
+<h2 class="section-title">Articles</h2>
+<div style="max-width:700px;">
+<a href="https://www.linkedin.com/feed/update/urn:li:activity:7436191286480498688/" rel="noopener" style="display:block;padding:1.5rem;background:#1a1a1a;border-radius:8px;border:1px solid #2a2a2a;text-decoration:none;transition:all 0.2s;" target="_blank">
+<h3 style="color:#00f5d4;margin:0 0 0.5rem 0;font-size:1.25rem;">Lessons from Building a Trading System</h3>
+<p style="color:#999;margin:0;line-height:1.6;">A retrospective on Python, testing and why trading-system engineering is different from finding a profitable strategy.</p>
+</a>
+</div>
+</div>
+</section>
+<!-- Contact -->
+<section class="section" id="contact">
+<div class="container">
+<div class="contact-block">
+<div class="section-label">Contact</div>
+<h2>Let's connect.</h2>
+<p>I am interested in aviation operations, operations/data analytics and technical operations roles. I enjoy solving problems where operational details and data meet.</p>
+<div class="contact-links">
+<a class="contact-link" href="https://github.com/yumorepos" rel="noopener" target="_blank">
+<svg fill="currentColor" height="22" viewbox="0 0 24 24" width="22"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path></svg>
             GitHub
           </a>
-          <a href="mailto:Yumo.hsu@gmail.com" class="contact-link">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+<a class="contact-link" href="mailto:Yumo.hsu@gmail.com">
+<svg fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="22"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
             Email
           </a>
-          <a href="https://linkedin.com/in/yumo-xu-1589b7326" target="_blank" rel="noopener" class="contact-link">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+<a class="contact-link" href="https://linkedin.com/in/yumo-xu-1589b7326" rel="noopener" target="_blank">
+<svg fill="currentColor" height="22" viewbox="0 0 24 24" width="22"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
             LinkedIn
           </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <p>Built by Yumo · <span id="year"></span> · Montreal, Canada</p>
-    </div>
-  </footer>
-
-  <script src="main.js"></script>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="footer">
+<div class="container">
+<p>Built by Yumo · <span id="year"></span> · Montreal, Canada</p>
+</div>
+</footer>
+<script src="main.js"></script>
 </body>
 </html>

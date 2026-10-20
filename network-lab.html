@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Network Lab is Yumo Xu's Python and DuckDB airline route-screening research project. Its evaluation includes corrected data errors, an honest historical comparison, and documented limitations.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Network Lab — Airline Route Screening | Yumo Xu">
+<meta property="og:description" content="Building and auditing airline route screening with public data, Python, DuckDB, and historical testing.">
+<meta property="og:url" content="https://yumorepos.github.io/network-lab.html">
+<meta name="twitter:card" content="summary">
+<title>Network Lab — Airline Route Screening | Yumo Xu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="style.css" rel="stylesheet">
+</head>
+<body class="case-page">
+<nav class="nav case-nav" aria-label="Case study navigation">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">yumo<span class="accent">.</span></a>
+    <a class="case-back" href="index.html#projects">← Back to projects</a>
+  </div>
+</nav>
+<main class="case-main">
+  <div class="container case-container">
+    <header class="case-hero">
+      <div class="section-label">SELECTED PROJECT / AVIATION ANALYTICS</div>
+      <h1>Network Lab<span class="case-dot">.</span></h1>
+      <p class="case-lede">Screening airline routes with public data. Testing assumptions against reality.</p>
+      <div class="case-tags"><span class="tag">Python</span><span class="tag">DuckDB</span><span class="tag">SQL</span><span class="tag">Airline operations</span><span class="tag">Validation</span></div>
+      <div class="case-actions">
+        <a class="btn btn-primary" href="https://github.com/yumorepos/network-lab" target="_blank" rel="noopener noreferrer">View project repository ↗</a>
+        <a class="btn btn-secondary" href="https://github.com/yumorepos/network-lab/blob/main/docs/FINAL_INDEPENDENT_REVIEW.md" target="_blank" rel="noopener noreferrer">Read independent review ↗</a>
+      </div>
+    </header>
+
+    <div class="case-snapshot" aria-label="Project at a glance">
+      <div><span class="case-mini-label">ROLE</span><strong>Personal research project</strong></div>
+      <div><span class="case-mini-label">FOCUS</span><strong>Fixed-gauge route screening</strong></div>
+      <div><span class="case-mini-label">RESULT</span><strong>Auditable, not a validated predictor</strong></div>
+    </div>
+
+    <article class="case-article">
+      <section>
+        <h2>Why I built it</h2>
+        <p>I studied aviation management and have worked in travel operations, so I wanted to understand how an airline might evaluate routes it does not currently serve. I built Network Lab to explore that question using publicly available data, without pretending those sources offer the same detail as an airline's internal planning systems.</p>
+      </section>
+
+      <section>
+        <h2>What I built</h2>
+        <p>I created a Python and DuckDB workflow that brings together U.S. and Canadian aviation and economic data, including passenger demand, airline service, operating costs, and fuel prices. It records where demand is <strong>observed versus modeled</strong>, reconstructs competition, and applies documented assumptions to compare route economics.</p>
+        <p>For a <strong>fixed aircraft size</strong> and a predefined schedule menu, it produces <strong>LAUNCH, MONITOR, or PASS</strong> research-screening classifications. It does not optimize an airline's fleet, frequencies, or network.</p>
+        <div class="case-process" aria-label="Research workflow">
+          <div><span>01</span><strong>Ingest &amp; reconcile</strong><small>Public aviation and economic sources</small></div>
+          <div><span>02</span><strong>Estimate &amp; screen</strong><small>Demand, competition, route economics</small></div>
+          <div><span>03</span><strong>Audit &amp; replay</strong><small>Historical testing and documented limits</small></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>The important part: correcting the model</h2>
+        <p>The initial implementation had two material errors. It compared bidirectional passenger demand against departures counted in only one direction, and it missed connecting competitors by treating operating-airline certificates as customer-facing airline brands.</p>
+        <p>Those mistakes made some routes look more attractive than they should have. I corrected the logic, re-ran the screens, and kept the less favorable results rather than defending the original conclusions.</p>
+      </section>
+
+      <section class="case-finding">
+        <div class="case-mini-label">THE FINDING</div>
+        <h2>More complexity did not establish better predictions.</h2>
+        <p>In the historical <strong>WestJet Calgary</strong> replay, the full model showed <strong>no detectable incremental ranking value over a demand-only baseline for effects larger than the study could resolve.</strong> Smaller improvements remain unresolved.</p>
+        <p>The comparison covered only ten distinct launch events, limiting what can be concluded. A negative or inconclusive result is still valuable when it changes the scope of the claim.</p>
+      </section>
+
+      <section>
+        <h2>What this demonstrates</h2>
+        <p>The main achievement is not predicting which route will succeed. It is building traceable data workflows, checking units and airline mappings, comparing a complex approach with a simple baseline, and reducing claims when the evidence does not support them.</p>
+        <p>These are the habits I want to bring into aviation operations and analytics work: data quality, reproducibility, operational understanding, and clear communication about uncertainty.</p>
+      </section>
+
+      <section class="case-method">
+        <h2>Evidence &amp; limitations</h2>
+        <p>The August 17, 2026 independent release review reports <strong>206 passing tests and 29 reproducible artifacts</strong> using the full local warehouse. Those are <em>reported project-review results</em>, not tests re-run as part of this website update. The full warehouse is not included in GitHub, and the code-only review cannot independently reproduce the data-dependent metrics.</p>
+        <p>Some transborder demand inputs are historical or modeled. Fare estimates, competition proxies, and the limited replay sample also constrain the results. This remains research-grade decision support, not commercially validated route forecasting.</p>
+        <div class="case-source-links">
+          <a href="https://github.com/yumorepos/network-lab/blob/main/docs/FINAL_SCOPE_CONTRACT.md" target="_blank" rel="noopener noreferrer">Final scope contract ↗</a>
+          <a href="https://github.com/yumorepos/network-lab/blob/main/docs/FINAL_INDEPENDENT_REVIEW.md" target="_blank" rel="noopener noreferrer">Independent release review ↗</a>
+          <a href="https://github.com/yumorepos/network-lab/blob/main/docs/LIMITATIONS.md" target="_blank" rel="noopener noreferrer">Study limitations ↗</a>
+        </div>
+      </section>
+    </article>
+
+    <div class="case-bottom-cta">
+      <div><span class="case-mini-label">NEXT</span><h2>Explore more of my work.</h2></div>
+      <a class="btn btn-secondary" href="index.html#projects">Back to selected projects →</a>
+    </div>
+  </div>
+</main>
+<footer class="footer"><div class="container"><p>Yumo Xu · Aviation, data &amp; decision support · 2026</p></div></footer>
+</body>
+</html>

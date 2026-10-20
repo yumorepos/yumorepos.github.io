@@ -31,7 +31,13 @@
   // --- Smooth scroll for nav links ---
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-      const target = document.querySelector(this.getAttribute('href'));
+      const fragment = this.getAttribute('href');
+      if (!fragment || fragment === '#') {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+      const target = document.querySelector(fragment);
       if (target) {
         e.preventDefault();
         const offset = 80;
