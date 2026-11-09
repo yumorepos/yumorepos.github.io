@@ -31,14 +31,15 @@
       <div class="case-tags"><span class="tag">Python</span><span class="tag">DuckDB</span><span class="tag">SQL</span><span class="tag">Airline operations</span><span class="tag">Validation</span></div>
       <div class="case-actions">
         <a class="btn btn-primary" href="https://github.com/yumorepos/network-lab" target="_blank" rel="noopener noreferrer">View project repository ↗</a>
+        <a class="btn btn-secondary" href="https://network-lab-tweqoqjxhfrhj7imgmuftl.streamlit.app/" target="_blank" rel="noopener noreferrer">Explore live dashboard ↗</a>
         <a class="btn btn-secondary" href="https://github.com/yumorepos/network-lab/blob/main/docs/FINAL_INDEPENDENT_REVIEW.md" target="_blank" rel="noopener noreferrer">Read independent review ↗</a>
       </div>
     </header>
 
     <div class="case-snapshot" aria-label="Project at a glance">
-      <div><span class="case-mini-label">ROLE</span><strong>Personal research project</strong></div>
-      <div><span class="case-mini-label">FOCUS</span><strong>Fixed-gauge route screening</strong></div>
-      <div><span class="case-mini-label">RESULT</span><strong>Auditable, not a validated predictor</strong></div>
+      <div><span class="case-mini-label">CURRENT SCREEN</span><strong>200 markets · 3 airline studies</strong></div>
+      <div><span class="case-mini-label">HISTORICAL REPLAY</span><strong>463 candidate decisions</strong></div>
+      <div><span class="case-mini-label">MAIN FINDING</span><strong>No detectable ranking lift at tested resolution</strong></div>
     </div>
 
     <article class="case-article">
@@ -58,16 +59,46 @@
         </div>
       </section>
 
+      <section class="case-study-results" id="study-results">
+        <div class="case-mini-label">FROZEN RESEARCH OUTPUTS</div>
+        <h2>Three studies. One transparent screening method.</h2>
+        <p>Each study evaluates a specified aircraft size and predefined schedule menu. These are hypothetical route-screening classifications, not recommendations to operate flights.</p>
+        <div class="case-table-scroll" role="region" aria-label="Route screening results by airline" tabindex="0">
+          <table class="case-results-table">
+            <caption>Published snapshot; not a live forecast</caption>
+            <thead><tr><th scope="col">Study</th><th scope="col">Markets</th><th scope="col">LAUNCH</th><th scope="col">MONITOR</th><th scope="col">PASS</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">WestJet · YYC</th><td>76</td><td>0</td><td>0</td><td>76</td></tr>
+              <tr><th scope="row">Alaska · SEA</th><td>45</td><td>0</td><td>0</td><td>45</td></tr>
+              <tr><th scope="row">Porter · YYZ</th><td>79</td><td>1</td><td>1</td><td>77</td></tr>
+            </tbody>
+            <tfoot><tr><th scope="row">Total</th><td>200</td><td>1</td><td>1</td><td>198</td></tr></tfoot>
+          </table>
+        </div>
+        <p class="case-table-note">Porter–Boston was LAUNCH and Porter–Hartford was MONITOR under the model's fixed assumptions. Real decisions require independent airline data and operational checks.</p>
+      </section>
+
+      <section>
+        <h2>How I tested the claim</h2>
+        <p>I replayed the WestJet model at three historical decision dates—January 2022, January 2023, and January 2024—and compared its candidate rankings against a demand-only baseline.</p>
+        <div class="case-evidence-grid" aria-label="Historical replay evidence">
+          <div><strong>463</strong><span>candidate decision rows</span></div>
+          <div><strong>10</strong><span>distinct launch events</span></div>
+          <div><strong>≈5</strong><span>net events across at least two vintages: optimistic detectability floor</span></div>
+        </div>
+        <p>The sample had 15 positive rows from ten distinct events. The largest observed difference was one event. A smaller ranking improvement remains possible; the study cannot demonstrate superiority or equivalence.</p>
+      </section>
+
       <section>
         <h2>The important part: correcting the model</h2>
-        <p>The initial implementation had two material errors. It compared bidirectional passenger demand against departures counted in only one direction, and it missed connecting competitors by treating operating-airline certificates as customer-facing airline brands.</p>
-        <p>Those mistakes made some routes look more attractive than they should have. I corrected the logic, re-ran the screens, and kept the less favorable results rather than defending the original conclusions.</p>
+        <p>An independent audit found material errors: bidirectional passenger demand was compared with one-way capacity, connecting competitors were joined by operating certificate instead of customer-facing airline brand, and an incumbent cross-check was not genuinely independent.</p>
+        <p>Correcting the brand join lowered modeled median share by roughly 24 percentage points for Porter and 35 for Alaska. Porter fell from five LAUNCH scenarios to one. I kept the less flattering findings because source correctness matters more than a positive headline.</p>
       </section>
 
       <section class="case-finding">
         <div class="case-mini-label">THE FINDING</div>
         <h2>More complexity did not establish better predictions.</h2>
-        <p>In the historical <strong>WestJet Calgary</strong> replay, the full model showed <strong>no detectable incremental ranking value over a demand-only baseline for effects larger than the study could resolve.</strong> Smaller improvements remain unresolved.</p>
+        <p>In the historical <strong>WestJet Calgary</strong> replay, the full model showed <strong>no detectable incremental ranking value over a demand-only baseline for effects larger than the study could resolve.</strong> Smaller effects remain unresolved.</p>
         <p>The comparison covered only ten distinct launch events, limiting what can be concluded. A negative or inconclusive result is still valuable when it changes the scope of the claim.</p>
       </section>
 
@@ -79,12 +110,20 @@
 
       <section class="case-method">
         <h2>Evidence &amp; limitations</h2>
+        <p>The live Streamlit workspace allows visitors to inspect the route screen, individual markets, and research validation. The WestJet route screen was visually confirmed in a desktop browser on November 9, 2026; other study views and mobile behavior require separate visual QA.</p>
+        <p>In November 2026, I also audited the preserved warehouse in read-only mode. Historical airport-code reuse and Census geography can create plausible but imperfect joins. Focused checks confirmed GSP and JAN airport IDs and city-market assignments, while their CBSA mappings remain proxies—not fully validated catchment geographies.</p>
+        <details class="case-audit-details">
+          <summary>What the airport/metro audit checked</summary>
+          <p>In the recent three-hub source window, 32,517 of 29,276,082 passenger-segment legs (0.11%) reached U.S.-reported direct destinations without a CBSA join. None of those 20 destination codes appears as the final displayed airport of a published screening row. This cannot rule out indirect competition or already-served-market effects. No production inputs, model verdicts, or 463 replay decisions were recomputed or modified during these read-only audits.</p>
+        </details>
         <p>The August 17, 2026 independent release review reports <strong>206 passing tests and 29 reproducible artifacts</strong> using the full local warehouse. Those are <em>reported project-review results</em>, not tests re-run as part of this website update. The full warehouse is not included in GitHub, and the code-only review cannot independently reproduce the data-dependent metrics.</p>
         <p>Some transborder demand inputs are historical or modeled. Fare estimates, competition proxies, and the limited replay sample also constrain the results. This remains research-grade decision support, not commercially validated route forecasting.</p>
         <div class="case-source-links">
           <a href="https://github.com/yumorepos/network-lab/blob/main/docs/FINAL_SCOPE_CONTRACT.md" target="_blank" rel="noopener noreferrer">Final scope contract ↗</a>
           <a href="https://github.com/yumorepos/network-lab/blob/main/docs/FINAL_INDEPENDENT_REVIEW.md" target="_blank" rel="noopener noreferrer">Independent release review ↗</a>
           <a href="https://github.com/yumorepos/network-lab/blob/main/docs/LIMITATIONS.md" target="_blank" rel="noopener noreferrer">Study limitations ↗</a>
+          <a href="https://github.com/yumorepos/network-lab/blob/main/docs/STAGE_2R0_RESOLUTION.md" target="_blank" rel="noopener noreferrer">Replay resolution ↗</a>
+          <a href="https://github.com/yumorepos/network-lab/issues/14" target="_blank" rel="noopener noreferrer">Geography audit ↗</a>
         </div>
       </section>
     </article>

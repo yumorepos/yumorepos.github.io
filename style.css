@@ -976,3 +976,22 @@ body.loaded .hero-content {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
+
+/* Evidence-first Network Lab extension */
+.case-table-scroll{overflow-x:auto;border:1px solid var(--border-hover);border-radius:var(--radius-lg);margin:20px 0 15px}
+.case-table-scroll:focus-visible,.case-audit-details summary:focus-visible{outline:2px solid var(--accent-hover);outline-offset:3px}
+.case-results-table{width:100%;min-width:520px;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:.91rem}
+.case-results-table caption{text-align:left;padding:13px 16px;color:var(--text-secondary);font-size:.8rem}
+.case-results-table th,.case-results-table td{border-top:1px solid var(--border);padding:13px 15px;text-align:right}
+.case-results-table th:first-child{text-align:left;white-space:nowrap}
+.case-results-table thead th{color:var(--text-secondary);font-size:.78rem;font-weight:600}
+.case-results-table tbody th{font-weight:500}
+.case-results-table tfoot{background:var(--bg-elevated);font-weight:700}
+.case-article .case-table-note{font-size:.85rem;margin-top:3px}
+.case-evidence-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:20px 0}
+.case-evidence-grid>div{padding:18px;border:1px solid var(--border-hover);border-radius:var(--radius-lg);background:var(--bg-card)}
+.case-evidence-grid strong{display:block;font-size:clamp(1.5rem,3vw,2rem);line-height:1.2;color:var(--text);margin-bottom:8px}
+.case-evidence-grid span{display:block;color:var(--text-secondary);font-size:.79rem;line-height:1.45}
+.case-audit-details{border:1px solid var(--border-hover);border-radius:var(--radius-lg);padding:16px 18px 4px;margin:16px 0 22px}
+.case-audit-details summary{cursor:pointer;color:var(--text);font-weight:600;padding:0 0 12px}
+@media(max-width:600px){.case-evidence-grid{grid-template-columns:1fr}}
