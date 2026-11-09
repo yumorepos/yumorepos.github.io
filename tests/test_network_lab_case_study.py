@@ -24,7 +24,7 @@ class EvidenceChecks(unittest.TestCase):
         scan=Scan()
         scan.feed(s)
         for term in ["200","463","demand-only","WestJet","Alaska","Porter",
-                     "Smaller improvements remain unresolved","LAUNCH","MONITOR","PASS"]:
+                     "Smaller effects remain unresolved","LAUNCH","MONITOR","PASS"]:
             self.assertIn(term.lower(),s.lower())
         self.assertNotIn("right-sized",s.lower())
         self.assertEqual(scan.n_details,scan.n_summary)
@@ -41,4 +41,21 @@ class EvidenceChecks(unittest.TestCase):
             elif frag: self.assertIn(frag,scan.ids)
         for legacy in ["dashboard_route_screen.png","dashboard_scenario_grid.png"]:
             self.assertNotIn(legacy,s)
+
+    def test_exact_study_counts(self):
+        import re
+        s=(ROOT/"network-lab.html").read_text()
+        expected={
+            "WestJet · YYC":(76,0,0,76),
+            "Alaska · SEA":(45,0,0,45),
+            "Porter · YYZ":(79,1,1,77),
+            "Total":(200,1,1,198),
+        }
+        for study,nums in expected.items():
+            escaped=re.escape(study)
+            matches=re.findall(r'<tr><th scope="row">'+escaped+r'</th>(.*?)</tr>',s)
+            self.assertEqual(len(matches),1,study)
+            vals=tuple(map(int,re.findall(r'<td>(\\d+)</td>',matches[0])))
+            self.assertEqual(vals,nums,study)
+        self.assertEqual(sum(x[0] for k,x in expected.items() if k!="Total"),200)
 if __name__=="__main__": unittest.main()
