@@ -55,7 +55,7 @@ class EvidenceChecks(unittest.TestCase):
             escaped=re.escape(study)
             matches=re.findall(r'<tr><th scope="row">'+escaped+r'</th>(.*?)</tr>',s)
             self.assertEqual(len(matches),1,study)
-            vals=tuple(map(int,re.findall(r'<td>(\\d+)</td>',matches[0])))
+            vals=tuple(map(int,re.findall(r'<td>([0-9]+)</td>',matches[0])))
             self.assertEqual(vals,nums,study)
         self.assertEqual(sum(x[0] for k,x in expected.items() if k!="Total"),200)
 if __name__=="__main__": unittest.main()
