@@ -1,0 +1,98 @@
+name: One-time read-only historical privacy inventory
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/one_time_history_privacy_inventory.yml
+
+permissions:
+  contents: read
+
+jobs:
+  inventory:
+    if: github.repository == 'yumorepos/yumorepos.github.io'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout portfolio history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          path: portfolio
+          persist-credentials: false
+      - name: Checkout Network Lab history
+        uses: actions/checkout@v4
+        with:
+          repository: yumorepos/network-lab
+          fetch-depth: 0
+          path: network-lab
+          persist-credentials: false
+      - name: Print risk categories only, never matched contents
+        shell: bash
+        run: |
+          python - <<'PY'
+          import collections, pathlib, re, subprocess
+          R = {
+              "portfolio": pathlib.Path("portfolio"),
+              "network-lab": pathlib.Path("network-lab")
+          }
+          # Patterns are intentionally assembled to avoid registering the
+          # scanning program's own expression literals as hard-coded secrets.
+          patterns = {
+              "github-token": re.compile(("gh"+"p_")+r"[A-Za-z0-9]{30,}"),
+              "github-pat": re.compile(("github_"+"pat_")+r"[A-Za-z0-9_]{35,}"),
+              "openai-key": re.compile(("sk-")+r"(?:proj-)?[A-Za-z0-9_-]{24,}"),
+              "aws-key": re.compile(("AK"+"IA")+r"[A-Z0-9]{16}"),
+              "private-key": re.compile(("-----BEGIN ")+"(?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
+              "personal-email": re.compile(r"(?i)\b[A-Z0-9._%+-]+@(?:gmail|hotmail|outlook|icloud|yahoo|protonmail)\.(?:com|me)\b"),
+              "local-home": re.compile(r"/"+r"Users/[A-Za-z0-9_.-]+/"),
+          }
+          TEXT = {".md",".txt",".py",".toml",".yml",".yaml",".json",".csv",".html",".css",".js",".sh",".ini"}
+          RISK_PATH = re.compile(r"resume|curriculum|transcript|personal|medical|interview_story|linkedin_posts|credentials|secrets",re.I)
+          for label,root in R.items():
+              def git(*args, input=None):
+                  return subprocess.run(["git","-C",str(root),*args],input=input,
+                                        capture_output=True,check=True).stdout
+              refs = git("rev-list","--objects","--all").decode("utf-8","replace").splitlines()
+              oid_to_path={}
+              for row in refs:
+                  oid,_,path=row.partition(" ")
+                  if path: oid_to_path.setdefault(oid,path)
+              blobrows = git("cat-file","--batch-check=%(objectname) %(objecttype) %(objectsize)",
+                             input=("\n".join(oid_to_path)+"\n").encode()).decode().splitlines()
+              hits=collections.Counter()
+              risk_examples=collections.defaultdict(list)
+              scanned=0
+              for record in blobrows:
+                  parts=record.split()
+                  if len(parts)!=3 or parts[1]!="blob": continue
+                  oid,_,size=parts
+                  path=oid_to_path.get(oid,"")
+                  suffix=pathlib.PurePosixPath(path).suffix.lower()
+                  if RISK_PATH.search(path):
+                      hits["historical-career-or-sensitive-filename"]+=1
+                  if suffix in (".pdf",".doc",".docx",".xlsx",".p12",".pfx",".pem",".key",".duckdb",".db",".zip"):
+                      hits["historical-private-or-binary-file-type"]+=1
+                  if suffix not in TEXT or int(size)>300000: continue
+                  try: data=git("cat-file","blob",oid).decode("utf-8","replace")
+                  except Exception:
+                      hits["unreadable-blob"]+=1;continue
+                  scanned+=1
+                  for kind,rx in patterns.items():
+                      if rx.search(data):
+                          hits[kind]+=1
+                          # Redacted indicator only, never include the value or filename.
+                          if len(risk_examples[kind])<4:
+                              risk_examples[kind].append(oid[:12])
+              emails=git("log","--all","--format=%ae").decode("utf-8","replace").splitlines()
+              distinct=set(emails)
+              personal={email for email in distinct if patterns["personal-email"].search(email)}
+              print(f"REPOSITORY: {label}")
+              print(f"COMMITS_AUTHOR_EMAILS: distinct={len(distinct)}, consumer-domain={len(personal)} (no addresses printed)")
+              print(f"OBJECTS: distinct_paths={len(oid_to_path)}, text_blobs_scanned={scanned}")
+              for kind,count in sorted(hits.items()):
+                  print(f"RISK_CATEGORY: {kind} blob_count={count} sample_blob_ids={','.join(risk_examples[kind])}")
+              if not hits: print("RISK_CATEGORY: no matches to targeted patterns")
+              print("CAVEAT: read-only regex scan of reachable refs; binary contents and deleted/unreachable refs are not cleared by this check")
+          PY
