@@ -58,6 +58,35 @@ class EvidenceChecks(unittest.TestCase):
             vals=tuple(map(int,re.findall(r'<td>([0-9]+)</td>',matches[0])))
             self.assertEqual(vals,nums,study)
         self.assertEqual(sum(x[0] for k,x in expected.items() if k!="Total"),200)
+    def test_public_project_links_do_not_point_to_private_repos(self):
+        private_destinations = (
+            "github.com/yumorepos/autonomous-trading-system",
+            "github.com/yumorepos/polymarket-autopilot",
+        )
+        for path in ("index.html", "network-lab.html", "case-study.html"):
+            text = (ROOT / path).read_text(encoding="utf-8").lower()
+            for destination in private_destinations:
+                self.assertNotIn(destination, text, path)
+
+    def test_all_public_page_local_links_resolve(self):
+        for path in ("index.html", "network-lab.html", "case-study.html"):
+            s = (ROOT / path).read_text(encoding="utf-8")
+            links = Scan()
+            links.feed(s)
+            for href in links.urls:
+                if href.startswith(("http:", "https:", "mailto:")):
+                    continue
+                target, _, anchor = href.partition("#")
+                if not target:
+                    self.assertIn(anchor, links.ids, f"{path}: {href}")
+                else:
+                    linked = ROOT / target
+                    self.assertTrue(linked.is_file(), f"{path}: {href}")
+                    if anchor and target.endswith(".html"):
+                        dest = Scan()
+                        dest.feed(linked.read_text(encoding="utf-8"))
+                        self.assertIn(anchor, dest.ids, f"{path}: {href}")
+
     def test_no_outdated_public_resume_or_pdf_links(self):
         # Resume content is application-specific, not permanent GitHub Pages collateral.
         self.assertFalse((ROOT / "Yumo-Xu-Resume.pdf").exists())
