@@ -1,34 +1,47 @@
-# Yumo — portfolio, Network Lab update
+# Aviation Operations & Analytics — Portfolio
 
-**Status:** GitHub Pages website source, updated 2026-10-20.
+[**View live portfolio**](https://yumorepos.github.io/) · [**Network Lab case study**](https://yumorepos.github.io/network-lab.html) · [**Interactive airline research dashboard**](https://network-lab-tweqoqjxhfrhj7imgmuftl.streamlit.app/)
 
-## Changes
+This repository hosts a public, recruiter-facing technical portfolio focused on **airline operations analytics, network planning, geospatial data, data engineering and decision support**.
 
-- Updated the featured **Network Lab** project card to the user-approved short description.
-- Added `network-lab.html`, a dedicated, factual long-form case study with methodology and independent-review links.
-- Replaced outdated live-trading claims at the existing legacy `case-study.html` URL with a historical-project notice.
-- Kept the established dark layout, typography, navbar, animations, and project cards.
-- Updated the main page title and share metadata; removed nonexistent `og-image.png` references.
-- Fixed the navigation-logo `href="#"` handler so it no longer attempts to `querySelector('#')`.
+## Featured project: Network Lab
 
-## Preview
+Network Lab screens potential routes across three fixed-aircraft, configured-schedule studies using public government aviation data. The project presents clear methods, source verification, a 200-market research snapshot, and a point-in-time replay of 463 historical candidate decisions.
 
-Open `index.html` locally. Select **Read the case study** in the featured Network Lab card. Review desktop and mobile layouts before publishing.
+**Evidence boundary:** Historical testing found **no detectable incremental ranking value** over a demand-only baseline at effects larger than the study's resolution. Smaller improvements remain unresolved. Network Lab is research-grade *fixed-gauge screening*, not a validated route-success predictor or live airline operations product.
 
-## How to deploy safely
+- [Case study and visual summary](network-lab.html)
+- [Source repository and reproducibility](https://github.com/yumorepos/network-lab)
+- [Scope and assumptions](https://github.com/yumorepos/network-lab/blob/main/docs/FINAL_SCOPE_CONTRACT.md)
+- [Limitations and historical audit](https://github.com/yumorepos/network-lab/blob/main/docs/LIMITATIONS.md)
 
-These **five website files** are maintained on the `main` branch of `yumorepos/yumorepos.github.io`:
+## Site structure
 
-- Replace `index.html`, `main.js`, and `style.css`.
-- Add `network-lab.html`.
-- Replace the old `case-study.html` with the included historical-project notice.
+| Path | Purpose |
+|---|---|
+| `index.html` | Homepage, skills, and project selection |
+| `network-lab.html` | Primary aviation analytics case study |
+| `case-study.html` | Clearly labeled archived engineering project |
+| `style.css`, `main.js` | Shared presentation and interactions |
+| `tests/` | Link, evidence and public-tree guard tests |
+| `.github/workflows/ci.yml` | Checks run on push and pull requests |
 
-Review the old `Yumo-Xu-Resume.pdf` separately: the site no longer links it, but the old file may still remain accessible by direct URL on GitHub Pages. Check whether its contents are still current before leaving it publicly hosted.
+The website is static HTML/CSS/JavaScript, hosted on GitHub Pages. The separate Streamlit dashboard is deployed from the Network Lab repository.
 
-## Evidence
+## Local checks
 
-- https://github.com/yumorepos/network-lab/blob/main/docs/FINAL_SCOPE_CONTRACT.md
-- https://github.com/yumorepos/network-lab/blob/main/docs/FINAL_INDEPENDENT_REVIEW.md
-- https://github.com/yumorepos/network-lab/blob/main/docs/LIMITATIONS.md
+Run from the repository root:
 
-The independent review's numeric test counts are **reported historical results**, not re-run in this website edit. The live Streamlit demo link is intentionally omitted until availability is manually confirmed. The GitHub links were checked against accessible repository documents. LinkedIn and email addresses were preserved from the existing site but should be verified by the user.
+```bash
+python -m unittest discover -s tests -p 'test_*.py' -v
+```
+
+Open `index.html` locally to inspect the layout. For final review, confirm the public links, mobile navigation, accessibility and current Streamlit views manually; automated HTML checks cannot verify the rendered deployment.
+
+## Publication and privacy
+
+This is an intentionally **public portfolio**. It should contain project evidence and contact links that the owner has approved—not transcripts, personal background documents, private credentials, stale résumé PDFs or employers' internal files.
+
+An outdated résumé PDF was removed from the current public branch in November 2026. **Deletion from `main` does not erase public Git history, cached copies or forks.** A current, tailored résumé should be supplied directly with job applications rather than treated as a permanent public download.
+
+Use `main` as the published GitHub Pages source. Before updating live pages, review the diff, run CI and inspect the deployed result.
