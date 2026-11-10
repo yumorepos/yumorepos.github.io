@@ -1,0 +1,40 @@
+name: One-time retired portfolio branch cleanup
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/retire_stale_portfolio_branch.yml']
+permissions:
+  contents: write
+jobs:
+  retire:
+    if: github.repository == 'yumorepos/yumorepos.github.io'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Retire historic draft only when unchanged
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import os, json, urllib.request, urllib.parse
+          base="https://api.github.com/repos/yumorepos/yumorepos.github.io"
+          headers={"Authorization":"Bearer "+os.environ["GH_TOKEN"],
+                   "Accept":"application/vnd.github+json",
+                   "X-GitHub-Api-Version":"2022-11-28"}
+          def req(path, method="GET"):
+              request=urllib.request.Request(base+path,headers=headers,method=method)
+              with urllib.request.urlopen(request,timeout=30) as response:
+                  return json.load(response) if method=="GET" else None
+          target="draft/network-lab-case-study-evidence-20261109"
+          sha="ce0860fce745591725c7305d29118c817cba2684"
+          assert target!="main" and len(sha)==40
+          assert req("")["default_branch"]=="main"
+          ref="/git/ref/heads/"+urllib.parse.quote(target,safe="/")
+          actual=req(ref)["object"]["sha"]
+          if actual!=sha:
+              raise SystemExit("Draft branch changed; refuse deletion")
+          req(ref.replace("/git/ref/heads/","/git/refs/heads/",1),"DELETE")
+          branches=[b["name"] for b in req("/branches?per_page=100")]
+          if branches!=["main"]:
+              raise SystemExit("Unexpected remaining branches: "+str(branches))
+          print("Verified only main remains")
+          PY
