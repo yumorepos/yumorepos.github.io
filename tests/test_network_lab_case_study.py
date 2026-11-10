@@ -58,4 +58,13 @@ class EvidenceChecks(unittest.TestCase):
             vals=tuple(map(int,re.findall(r'<td>([0-9]+)</td>',matches[0])))
             self.assertEqual(vals,nums,study)
         self.assertEqual(sum(x[0] for k,x in expected.items() if k!="Total"),200)
+    def test_no_outdated_public_resume_or_pdf_links(self):
+        # Resume content is application-specific, not permanent GitHub Pages collateral.
+        self.assertFalse((ROOT / "Yumo-Xu-Resume.pdf").exists())
+        for path in ("index.html", "network-lab.html", "case-study.html", "README.md"):
+            text = (ROOT / path).read_text(encoding="utf-8").lower()
+            self.assertNotIn("yumo-xu-resume.pdf", text, path)
+        for path in ROOT.glob("*.pdf"):
+            self.fail(f"Unexpected publicly hosted PDF: {path.name}")
+
 if __name__=="__main__": unittest.main()
