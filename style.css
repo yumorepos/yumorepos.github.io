@@ -1006,3 +1006,15 @@ body.loaded .hero-content {
 .ops-bar-fill{height:100%;border-radius:7px;background:var(--accent);min-width:1px}
 .ops-bar-muted{background:var(--text-secondary)}
 @media(max-width:600px){.ops-bar-row{grid-template-columns:1fr 68px;gap:7px 12px}.ops-bar-row>span{grid-column:1 / -1}.ops-figure{padding:16px}}
+
+
+/* Aviation-first homepage: separate three flagship case studies from archives. */
+.portfolio-intro{max-width:750px;color:var(--text-secondary);margin:-24px 0 32px;line-height:1.7}
+.portfolio-subheading{font-size:clamp(1.04rem,2.4vw,1.35rem);font-weight:650;letter-spacing:-.015em;margin:34px 0 17px}
+.portfolio-series{font:500 .7rem/1.5 var(--mono);letter-spacing:.09em;color:var(--accent-hover);margin-bottom:10px}
+.portfolio-kpi{font-size:.83rem;color:var(--text-secondary);line-height:1.6;padding-top:5px}
+.portfolio-kpi strong{color:var(--text)}
+.aviation-portfolio-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.portfolio-secondary{border-top:1px solid var(--border-hover);margin-top:46px;padding-top:18px}
+.portfolio-secondary-note{color:var(--text-secondary);font-size:.88rem;max-width:720px;margin:-4px 0 20px}
+@media(max-width:768px){.aviation-portfolio-grid{grid-template-columns:1fr}.portfolio-intro{margin:-24px 0 24px}}
