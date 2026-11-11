@@ -58,3 +58,23 @@ now visible in the screenshots. This is manual sampled visual acceptance,
 not an exhaustive brand/typography/accessibility review.
 
 The research workflow was restored to **manual-only** after verification.
+
+
+## Combined analysis-exhibit regression — November 11, 2026
+
+[GitHub Actions #43107598230](https://github.com/yumorepos/yumorepos.github.io/actions/runs/43107598230)
+verified the **current combined site content** after both new analytical
+exhibits were published. All 12 Chromium page/viewport combinations passed
+with **zero** document-width/major-element overflow, uncaught JavaScript
+errors, mobile-menu failures or unrevealed scroll-animation elements.
+Additional checks verify 3 origin-group KPI comparison rows, 4
+carrier-reported late-aircraft cause bars, 5 synthetic sensitivity rows,
+and the **320px/390px keyboard-focusable horizontal-scrolling table**.
+
+I downloaded and manually inspected the 320px source screenshots for the
+operational-performance and recovery-sensitivity pages. The text and
+charts remained legible with no demonstrated clipped sections. The
+report is scoped to those browser widths, source snapshots and checks;
+it is not a complete screen-reader audit or verification of external
+provider link freshness. All automated browser workflow runs remain
+**manual-only** by default to minimize ongoing portfolio costs.
