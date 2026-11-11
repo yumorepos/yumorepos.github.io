@@ -74,6 +74,30 @@ def run(output:Path):
                             page.locator('#mobile-menu a[href="#projects"]').click()
                             if btn.get_attribute("aria-expanded")!="false" or menu.is_visible():
                                 issues.append(f"{tag}: mobile menu failed to close after navigation")
+                    # Final source-backed analysis sections added after the
+                    # earlier screenshot QA run must also survive narrow
+                    # viewports. Tables are intentionally horizontally scrollable
+                    # inside their labeled region, not the full document.
+                    if filename=="airline-operations.html":
+                        if page.locator("#origin-comparison .case-results-table tbody tr").count()!=3:
+                            issues.append(f"{tag}: missing origin KPI comparison rows")
+                        if page.locator("#origin-comparison .ops-bar-row").count()!=4:
+                            issues.append(f"{tag}: missing carrier-reported cause comparisons")
+                    if filename=="disruption-recovery.html":
+                        if page.locator("#sensitivity .case-results-table tbody tr").count()!=5:
+                            issues.append(f"{tag}: missing five synthetic sensitivity variants")
+                        if width<=390:
+                            region=page.locator("#sensitivity .case-table-scroll")
+                            if region.count()!=1:
+                                issues.append(f"{tag}: missing scrollable sensitivity table")
+                            else:
+                                bounds=region.evaluate("""el=>({
+                                  outer:el.clientWidth,inner:el.scrollWidth,
+                                  region:el.getAttribute('role'),
+                                  focus:el.getAttribute('tabindex')
+                                })""")
+                                if bounds["outer"]<=0 or bounds["inner"]<bounds["outer"] or bounds["region"]!="region" or bounds["focus"]!="0":
+                                    issues.append(f"{tag}: sensitivity table keyboard/scroll region invalid: {bounds}")
                     if pageerrors:
                         issues.append(f"{tag}: uncaught JS errors: "+str(pageerrors[:3]))
                     # A full-page screenshot does NOT implicitly scroll the
