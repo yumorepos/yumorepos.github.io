@@ -25,7 +25,7 @@ class SensitivityExhibit(unittest.TestCase):
                       "changing penalty values also changes the units",
                       "no losses are expected"):
             self.assertIn(claim,section)
-        self.assertIn("network-lab/blob/main/experiments/disruption_recovery/SENSITIVITY_RESULTS.md",section)
+        self.assertIn("network-lab/blob/main/experiments/disruption_recovery/sensitivity_results.md",section)
 
 if __name__=="__main__":
     unittest.main()
