@@ -80,21 +80,37 @@ def run(output:Path):
                     # viewport: intersection-observer fade-ins would otherwise
                     # be invisible in below-the-fold screenshots. Walk through
                     # the complete page before asserting and capturing it.
+                    page.wait_for_load_state("load")
                     await_reveal=page.evaluate("""async () => {
-                      const height=document.documentElement.scrollHeight;
-                      const stride=Math.max(240,Math.floor(innerHeight*0.65));
-                      for(let y=0;y<=height;y+=stride){
-                        window.scrollTo(0,y);
-                        await new Promise(resolve=>setTimeout(resolve,65));
+                      // The site's html {scroll-behavior:smooth} makes basic
+                      // scrollTo calls animate and miss target positions during
+                      // fast automated walkthroughs. Force instant test-only
+                      // navigation while preserving actual site CSS.
+                      const root=document.documentElement;
+                      const prior=root.style.scrollBehavior;
+                      root.style.scrollBehavior='auto';
+                      try {
+                        const height=root.scrollHeight;
+                        const stride=Math.max(180,Math.floor(innerHeight*0.55));
+                        for(let y=0;y<=height;y+=stride){
+                          window.scrollTo({top:y,behavior:'instant'});
+                          await new Promise(resolve=>setTimeout(resolve,100));
+                        }
+                        window.scrollTo({top:height,behavior:'instant'});
+                        await new Promise(resolve=>setTimeout(resolve,250));
+                        window.scrollTo({top:0,behavior:'instant'});
+                        await new Promise(resolve=>setTimeout(resolve,700));
+                        const remaining=[...document.querySelectorAll('.fade-in:not(.visible)')];
+                        return remaining.map(el=>({
+                          selector:el.className,
+                          position:Math.round(el.getBoundingClientRect().top+scrollY)
+                        }));
+                      } finally {
+                        root.style.scrollBehavior=prior;
                       }
-                      window.scrollTo(0,height);
-                      await new Promise(resolve=>setTimeout(resolve,200));
-                      window.scrollTo(0,0);
-                      await new Promise(resolve=>setTimeout(resolve,350));
-                      return document.querySelectorAll('.fade-in:not(.visible)').length;
                     }""")
                     if await_reveal:
-                        issues.append(f"{tag}: {await_reveal} scroll-triggered sections did not become visible")
+                        issues.append(f"{tag}: {len(await_reveal)} scroll-triggered sections did not become visible: {await_reveal[:5]}")
                     snap=output/f"{Path(filename).stem}-{label}.png"
                     page.screenshot(path=str(snap),full_page=True,animations="disabled")
                     audit.append({"page":filename,"viewport":label,"width":width,
