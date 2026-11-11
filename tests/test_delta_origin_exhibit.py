@@ -42,7 +42,7 @@ class SegmentedEvidence(unittest.TestCase):
                        "carrier-reported attribution","Neither the raw gap nor",
                        "not an independently linked causal explanation"):
             self.assertIn(phrase,PAGE)
-        self.assertIn('github.com/yumorepos/fleet-tracker/pull/12',PAGE)
+        self.assertIn('github.com/yumorepos/fleet-tracker/blob/main/docs/BTS_DELTA_SEGMENT_2025_RESULTS.md',PAGE)
 
     def test_chart_is_labeled_and_does_not_reuse_full_population_denominator(self):
         section=PAGE.split('id="origin-comparison"',1)[1].split('id="connections"',1)[0]
