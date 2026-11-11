@@ -76,12 +76,48 @@ def run(output:Path):
                                 issues.append(f"{tag}: mobile menu failed to close after navigation")
                     if pageerrors:
                         issues.append(f"{tag}: uncaught JS errors: "+str(pageerrors[:3]))
+                    # A full-page screenshot does NOT implicitly scroll the
+                    # viewport: intersection-observer fade-ins would otherwise
+                    # be invisible in below-the-fold screenshots. Walk through
+                    # the complete page before asserting and capturing it.
+                    page.wait_for_load_state("load")
+                    await_reveal=page.evaluate("""async () => {
+                      // The site's html {scroll-behavior:smooth} makes basic
+                      // scrollTo calls animate and miss target positions during
+                      // fast automated walkthroughs. Force instant test-only
+                      // navigation while preserving actual site CSS.
+                      const root=document.documentElement;
+                      const prior=root.style.scrollBehavior;
+                      root.style.scrollBehavior='auto';
+                      try {
+                        const height=root.scrollHeight;
+                        const stride=Math.max(180,Math.floor(innerHeight*0.55));
+                        for(let y=0;y<=height;y+=stride){
+                          window.scrollTo({top:y,behavior:'instant'});
+                          await new Promise(resolve=>setTimeout(resolve,100));
+                        }
+                        window.scrollTo({top:height,behavior:'instant'});
+                        await new Promise(resolve=>setTimeout(resolve,250));
+                        window.scrollTo({top:0,behavior:'instant'});
+                        await new Promise(resolve=>setTimeout(resolve,700));
+                        const remaining=[...document.querySelectorAll('.fade-in:not(.visible)')];
+                        return remaining.map(el=>({
+                          selector:el.className,
+                          position:Math.round(el.getBoundingClientRect().top+scrollY)
+                        }));
+                      } finally {
+                        root.style.scrollBehavior=prior;
+                      }
+                    }""")
+                    if await_reveal:
+                        issues.append(f"{tag}: {len(await_reveal)} scroll-triggered sections did not become visible: {await_reveal[:5]}")
                     snap=output/f"{Path(filename).stem}-{label}.png"
                     page.screenshot(path=str(snap),full_page=True,animations="disabled")
                     audit.append({"page":filename,"viewport":label,"width":width,
                                   "document_width":metrics["document"],
                                   "heading_count":metrics["headingCount"],
-                                  "js_errors":pageerrors,"screenshot":snap.name})
+                                  "js_errors":pageerrors,"unrevealed_after_scroll":await_reveal,
+                                  "screenshot":snap.name})
                     page.close()
                 context.close()
         finally:

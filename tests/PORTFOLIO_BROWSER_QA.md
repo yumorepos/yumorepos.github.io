@@ -27,3 +27,34 @@ Core analytical pages and graphs must still be manually inspected for chart
 meaning, typographic hierarchy, and mobile readability before a claim of
 complete visual quality assurance. The browser QA adds confidence but does not
 verify external link freshness or domain-specific analysis correctness.
+
+## Full-page animation coverage refinement (2026-11-11)
+
+The initial Chromium run generated screenshots before scrolling the homepage.
+Although bounding boxes and mobile navigation passed, the IntersectionObserver
+reveal elements had `opacity: 0` until visited, leaving below-the-fold
+content blank in screenshots. The viewport was not being scrolled in the
+test; this was a **visual-QA coverage failure, not a confirmed user-facing
+rendering defect**.
+
+The refined browser script now walks the entire page at each viewport,
+waits for its scroll animations, checks that no `.fade-in` elements remain
+unrevealed, returns to the top, and only then captures a full-page
+screenshot. It must pass a new real Chromium run before its results
+are accepted. Screenshots still require independent visual inspection.
+
+
+**Resolved and independently checked:** [run #43106480669](https://github.com/yumorepos/yumorepos.github.io/actions/runs/43106480669)
+passed **all 12 headless Chromium viewport/page combinations** with **zero**
+unrevealed \`.fade-in\` items and no automated layout/navigation/JS errors.
+The original scroll failed to reach actual target sections because CSS
+\`scroll-behavior: smooth\` animated each jump; subsequent commands overtook
+the previous movement. The QA-only runner now uses instant scrolling, visits
+the entire document, waits for the reveal classes and transitions, and saves
+12 complete screenshots. I downloaded the resulting screenshot artifact
+and reviewed homepage desktop/mobile captures: the hero, the three case
+studies, additional projects, skills, articles and contact sections are
+now visible in the screenshots. This is manual sampled visual acceptance,
+not an exhaustive brand/typography/accessibility review.
+
+The research workflow was restored to **manual-only** after verification.
