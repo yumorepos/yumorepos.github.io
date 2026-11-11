@@ -76,12 +76,32 @@ def run(output:Path):
                                 issues.append(f"{tag}: mobile menu failed to close after navigation")
                     if pageerrors:
                         issues.append(f"{tag}: uncaught JS errors: "+str(pageerrors[:3]))
+                    # A full-page screenshot does NOT implicitly scroll the
+                    # viewport: intersection-observer fade-ins would otherwise
+                    # be invisible in below-the-fold screenshots. Walk through
+                    # the complete page before asserting and capturing it.
+                    await_reveal=page.evaluate("""async () => {
+                      const height=document.documentElement.scrollHeight;
+                      const stride=Math.max(240,Math.floor(innerHeight*0.65));
+                      for(let y=0;y<=height;y+=stride){
+                        window.scrollTo(0,y);
+                        await new Promise(resolve=>setTimeout(resolve,65));
+                      }
+                      window.scrollTo(0,height);
+                      await new Promise(resolve=>setTimeout(resolve,200));
+                      window.scrollTo(0,0);
+                      await new Promise(resolve=>setTimeout(resolve,350));
+                      return document.querySelectorAll('.fade-in:not(.visible)').length;
+                    }""")
+                    if await_reveal:
+                        issues.append(f"{tag}: {await_reveal} scroll-triggered sections did not become visible")
                     snap=output/f"{Path(filename).stem}-{label}.png"
                     page.screenshot(path=str(snap),full_page=True,animations="disabled")
                     audit.append({"page":filename,"viewport":label,"width":width,
                                   "document_width":metrics["document"],
                                   "heading_count":metrics["headingCount"],
-                                  "js_errors":pageerrors,"screenshot":snap.name})
+                                  "js_errors":pageerrors,"unrevealed_after_scroll":await_reveal,
+                                  "screenshot":snap.name})
                     page.close()
                 context.close()
         finally:

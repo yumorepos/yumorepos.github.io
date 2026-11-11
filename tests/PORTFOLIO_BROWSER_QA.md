@@ -27,3 +27,18 @@ Core analytical pages and graphs must still be manually inspected for chart
 meaning, typographic hierarchy, and mobile readability before a claim of
 complete visual quality assurance. The browser QA adds confidence but does not
 verify external link freshness or domain-specific analysis correctness.
+
+## Full-page animation coverage refinement (2026-11-11)
+
+The initial Chromium run generated screenshots before scrolling the homepage.
+Although bounding boxes and mobile navigation passed, the IntersectionObserver
+reveal elements had `opacity: 0` until visited, leaving below-the-fold
+content blank in screenshots. The viewport was not being scrolled in the
+test; this was a **visual-QA coverage failure, not a confirmed user-facing
+rendering defect**.
+
+The refined browser script now walks the entire page at each viewport,
+waits for its scroll animations, checks that no `.fade-in` elements remain
+unrevealed, returns to the top, and only then captures a full-page
+screenshot. It must pass a new real Chromium run before its results
+are accepted. Screenshots still require independent visual inspection.
