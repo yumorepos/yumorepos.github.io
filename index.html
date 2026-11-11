@@ -55,10 +55,10 @@
         Open to opportunities
       </div>
 <h1 class="hero-title">
-        I build systems that<br/>
-<span class="gradient-text typewriter" data-text="turn data into decisions."></span>
+        I analyze airline<br/>
+<span class="gradient-text">operations with evidence.</span>
 </h1>
-<p class="hero-subtitle">Corporate travel consultant with aviation management training. I build Python and data-analytics projects focused on operational decisions, data quality, and clear evidence.</p>
+<p class="hero-subtitle">I combine corporate travel operations experience with Python, SQL and aviation research to investigate schedule reliability, test route-screening assumptions and evaluate constrained decisions. My results include the limitations, not just the numbers.</p>
 <div class="hero-actions">
 <a class="btn btn-primary" href="#projects">View my work</a>
 <a class="btn btn-secondary" href="https://github.com/yumorepos" rel="noopener" target="_blank">
@@ -153,7 +153,8 @@
 <section class="section" id="projects">
 <div class="container">
 <div class="section-label">Projects</div>
-<h2 class="section-title">Selected Projects</h2>
+<h2 class="section-title">Three Aviation Analytics Case Studies</h2>
+<p class="portfolio-intro">Operational questions, reproducible methods, meaningful baselines and clearly stated evidence limits. Each case study links to the underlying code and results.</p>
 <!-- Featured Project -->
 <div class="project-featured">
 <div class="project-featured-header">
@@ -167,8 +168,9 @@
 <span class="tag">Research</span>
 </div>
 </div>
+<p class="portfolio-series">CASE STUDY 01 / 03 · NETWORK PLANNING</p>
 <h3 class="project-featured-title">Network Lab | Airline Route Screening</h3>
-<p class="project-featured-desc">I built a Python and DuckDB workflow that combines public aviation and economic data to screen possible airline routes under explicit assumptions. After finding and fixing material data-unit and competitor-mapping errors, I tested it against a simpler demand-only baseline. The result is an auditable research tool with clearly documented limits, not a claim of proven route prediction.</p>
+<p class="project-featured-desc">I screened 200 hypothetical airline markets and tested 463 historical replay decisions against a demand-only baseline. The additional model complexity showed <strong>no detectable incremental ranking improvement</strong> at the tested resolution. The result is a reproducible decision-screening study, not a claim of accurate route prediction.</p>
 <div class="project-features">
 <div class="feature"><svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg> Public-data ingestion and reconciliation</div>
 <div class="feature"><svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg> Carrier and market competition reconstruction</div>
@@ -182,12 +184,19 @@
 <a class="btn btn-secondary" href="https://github.com/yumorepos/network-lab" rel="noopener" target="_blank">View source on GitHub ↗</a>
 </div><p class="featured-evidence">Research scope and caveats: <a href="https://github.com/yumorepos/network-lab/blob/main/docs/FINAL_SCOPE_CONTRACT.md" rel="noopener noreferrer" target="_blank">scope contract ↗</a></p>
 </div>
-<!-- More Projects -->
-<div class="projects-grid"><div class="project-card"><div class="project-card-icon">
+<!-- Aviation case studies continue in a dedicated two-column group -->
+<h3 class="portfolio-subheading">Operational analysis and recovery research</h3>
+<div class="projects-grid aviation-portfolio-grid"><div class="project-card"><div class="project-card-icon">
 <svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-</div><h4><a href="airline-operations.html">Airline Operational Performance &amp; Reliability</a></h4><p>I audited official U.S. flight records for Delta, validated on-time KPIs, and independently checked observed aircraft connections across January and July 2025. <a class="case-inline-link" href="airline-operations.html">Read the case study →</a></p><div class="project-card-tags"><span class="tag-sm">Aviation</span><span class="tag-sm">SQL</span><span class="tag-sm">Validation</span></div></div><div class="project-card"><div class="project-card-icon">
+</div><p class="portfolio-series">CASE STUDY 02 / 03 · OPERATIONAL RELIABILITY</p>
+<h4><a href="airline-operations.html">Airline Operational Performance &amp; Reliability</a></h4><p>Official U.S. Delta-reporting domestic records, independent KPI reconciliation, gate-time reconstruction and observed aircraft-connection checks.</p><p class="portfolio-kpi"><strong>80.68% / 75.16%</strong> arrival punctuality · January / July 2025; two distinct samples, not a seasonal effect.</p><p><a class="case-inline-link" href="airline-operations.html">Read the case study →</a></p><div class="project-card-tags"><span class="tag-sm">Aviation</span><span class="tag-sm">SQL</span><span class="tag-sm">Validation</span></div></div><div class="project-card"><div class="project-card-icon">
 <svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20"><path d="M4 5h6v6H4zM14 13h6v6h-6z"></path><path d="M10 8h4m-2 0v5"></path></svg>
-</div><h4><a href="disruption-recovery.html">Airline Disruption Recovery Optimization</a></h4><p>A small, fully synthetic aircraft-recovery MILP, tested against cost-aware greedy, all-cancel and fly-first baselines across 30 reproducible scenarios. <a class="case-inline-link" href="disruption-recovery.html">Read the case study →</a></p><div class="project-card-tags"><span class="tag-sm">Operations Research</span><span class="tag-sm">MILP</span><span class="tag-sm">Python</span></div></div><div class="project-card"><div class="project-card-icon">
+</div><p class="portfolio-series">CASE STUDY 03 / 03 · OPERATIONS RESEARCH</p>
+<h4><a href="disruption-recovery.html">Airline Disruption Recovery Optimization</a></h4><p>A synthetic mixed-integer aircraft recovery experiment, independently checked on a small permutation oracle and compared against feasible decision policies.</p><p class="portfolio-kpi"><strong>12 better / 18 tied</strong> versus cost-aware greedy across 30 fictional scenarios; no real airline savings.</p><p><a class="case-inline-link" href="disruption-recovery.html">Read the case study →</a></p><div class="project-card-tags"><span class="tag-sm">Operations Research</span><span class="tag-sm">MILP</span><span class="tag-sm">Python</span></div></div></div>
+<div class="portfolio-secondary">
+<h3 class="portfolio-subheading">Additional engineering work</h3>
+<p class="portfolio-secondary-note">Earlier automation and research projects, kept separate from the aviation case-study portfolio.</p>
+<div class="projects-grid other-projects-grid"><div class="project-card"><div class="project-card-icon">
 <svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
 </div><h4><a href="case-study.html">Autonomous Trading System</a></h4><p>Historical execution and risk-control engineering. Small-scale real-money testing occurred, but no scalable edge was established; operations wound down in June 2026. <a class="case-inline-link" href="case-study.html">Read the case study →</a></p><div class="project-card-tags"><span class="tag-sm">Python</span><span class="tag-sm">Risk controls</span><span class="tag-sm">Historical</span></div></div><div class="project-card"><div class="project-card-icon">
 <svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
