@@ -1,11 +1,6 @@
 # Bounded browser/viewport QA. No publication, new app or data fetch.
 name: Portfolio viewport and navigation QA
 on:
-  push:
-    branches: [qa/final-aviation-exhibit-viewport-20261111]
-    paths:
-      - 'scripts/portfolio_browser_qa.py'
-      - '.github/workflows/portfolio-browser-qa.yml'
   workflow_dispatch:
 permissions:
   contents: read
