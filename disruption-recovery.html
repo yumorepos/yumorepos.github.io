@@ -81,6 +81,26 @@
       <p>Against cost-aware greedy, the MILP was better in <strong>12 cases</strong>, tied in <strong>18</strong> and worse in none. The mean difference was <strong>90.05 illustrative units</strong>. The much larger difference against fly-first is less meaningful because that policy is intentionally weak. These results are <strong>not real airline savings</strong>.</p>
     </section>
 
+    <section id="sensitivity">
+      <h2>Does the result depend on the assumptions?</h2>
+      <p>I changed one synthetic input family at a time and reran the same 30 scenarios against the <strong>cost-aware greedy</strong> comparator. This does not test real-world airline operations, but it shows whether the toy result depends heavily on a single choice of penalty or turnaround screen.</p>
+      <div class="case-table-scroll" role="region" aria-label="Synthetic MILP parameter sensitivity against cost-aware greedy" tabindex="0">
+        <table class="case-results-table">
+          <caption>Thirty identical fictional scenario patterns per configuration · MILP better / tied; no losses</caption>
+          <thead><tr><th scope="col">Assumption</th><th scope="col">MILP better</th><th scope="col">Tied</th><th scope="col">Mean MILP cancellations</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Original penalties and turn screen</th><td>12</td><td>18</td><td>1.97</td></tr>
+            <tr><th scope="row">Delay penalty ×0.5</th><td>13</td><td>17</td><td>1.30</td></tr>
+            <tr><th scope="row">Delay penalty ×2</th><td>13</td><td>17</td><td>2.30</td></tr>
+            <tr><th scope="row">Turn screen +20 minutes</th><td>11</td><td>19</td><td>2.23</td></tr>
+            <tr><th scope="row">Cancellation penalty ×2</th><td>13</td><td>17</td><td>1.30</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The MILP beats the locally cost-aware greedy in <strong>11–13 of 30</strong> tiny synthetic scenarios under these changes, and ties in most. No losses are expected when the exact finite MILP includes the heuristic schedule in the same feasible solution set. Changing penalty values also changes the units and the objective itself, so raw gaps should not be compared as business savings across scenarios.</p>
+      <p class="case-table-note">These figures were independently rerun byte-for-byte. They are a sensitivity check on a finite fictional model, <strong>not evidence of airline-scale robustness, forecast accuracy or financial benefit</strong>. <a class="case-inline-link" href="https://github.com/yumorepos/network-lab/blob/main/experiments/disruption_recovery/SENSITIVITY_RESULTS.md" target="_blank" rel="noopener noreferrer">Read the detailed synthetic sensitivity evidence ↗</a></p>
+    </section>
+
     <section id="finding" class="case-finding">
       <h2>The operational takeaway</h2>
       <p>A stronger baseline substantially changes how impressive an optimization result appears. The useful lesson is not a monetary percentage: it is that <strong>aircraft positioning, operating constraints and an explicit cancellation option</strong> can be formulated, tested and compared against transparent decision policies.</p>
