@@ -43,6 +43,10 @@ class AviationHomepage(unittest.TestCase):
         self.assertIn('class="projects-grid aviation-portfolio-grid"',flagship)
         self.assertIn('class="projects-grid other-projects-grid"',additional)
 
+    def test_homepage_html_div_nesting_is_balanced(self):
+        # Prevent a successful text-only CI run with broken section wrappers.
+        self.assertEqual(HOME.count("<div "),HOME.count("</div>"))
+
     def test_source_and_internal_navigation(self):
         parser=HeadingLinks()
         parser.feed(HOME)
