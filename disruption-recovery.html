@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An educational synthetic airline disruption-recovery MILP with reproducible 30-scenario baseline comparison, tested aircraft continuity and clearly stated operational limits.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Airline Disruption Recovery Optimization | Yumo Xu">
+  <meta property="og:url" content="https://yumorepos.github.io/disruption-recovery.html">
+  <meta property="og:description" content="Exploring aircraft recovery decisions under synthetic constraints and benchmarking a mixed-integer optimizer against feasible policies.">
+  <title>Airline Disruption Recovery Optimization | Yumo Xu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+<body class="case-page">
+<nav class="nav case-nav" aria-label="Case study navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">yumo<span class="accent">.</span></a>
+    <a href="index.html#projects" class="case-back">← Back to projects</a>
+  </div>
+</nav>
+<main class="case-main">
+<div class="container case-container">
+  <header class="case-hero">
+    <div class="section-label">CASE STUDY 03 / OPERATIONS RESEARCH</div>
+    <h1>Recover the schedule<span class="case-dot">.</span><br>Respect the constraints.</h1>
+    <p class="case-lede">A small mixed-integer optimization experiment comparing which synthetic flights to operate, delay or cancel when aircraft become constrained after a disruption.</p>
+    <div class="case-tags"><span class="tag">Mixed-integer programming</span><span class="tag">SciPy HiGHS</span><span class="tag">Python</span><span class="tag">Optimization</span><span class="tag">Validation</span></div>
+    <div class="case-actions">
+      <a class="btn btn-primary" href="https://github.com/yumorepos/network-lab/tree/main/experiments/disruption_recovery" target="_blank" rel="noopener noreferrer">View experimental code ↗</a>
+      <a class="btn btn-secondary" href="https://github.com/yumorepos/network-lab/blob/main/experiments/disruption_recovery/BASELINE_AUDIT_RESULTS.md" target="_blank" rel="noopener noreferrer">Read benchmark evidence ↗</a>
+    </div>
+  </header>
+  <div class="case-snapshot" aria-label="Project overview">
+    <div><span class="case-mini-label">SCENARIO TYPE</span><strong>Entirely synthetic · 5 flights / 2 aircraft positions</strong></div>
+    <div><span class="case-mini-label">REPRODUCIBILITY</span><strong>30 seeded cases · identical repeat JSON</strong></div>
+    <div><span class="case-mini-label">COMPARISON</span><strong>MILP better in 12, tied in 18 vs cost-aware greedy</strong></div>
+  </div>
+
+  <article class="case-article">
+    <section id="question">
+      <h2>Operational question</h2>
+      <p>When flights cannot all operate exactly as planned, how should an airline weigh cancellations against delayed operations under aircraft constraints? A recovery strategy must consider airport positioning, the time an aircraft becomes available, minimum ground time, flight duration and the fact that each flight can operate once—or be canceled.</p>
+      <p>I built a <strong>small educational simulator</strong>, not a dispatch system. Its purpose is to demonstrate model formulation, realistic constraint logic at the toy-scenario level, careful benchmark selection and a willingness to question whether an apparent improvement is credible.</p>
+    </section>
+
+    <section id="method">
+      <h2>Model and validation method</h2>
+      <p>The model enumerates feasible paths for each fictional aircraft, then uses a binary mixed-integer set-partitioning formulation to choose a compatible combination of paths and cancellations. The objective adds <strong>illustrative cancellation penalties</strong> and <strong>passenger-delay penalties</strong>. The solver certifies an optimum only inside the finite flight set and discrete delay options that were enumerated.</p>
+      <div class="case-process" aria-label="Research method steps">
+        <div><span>01 / FORMULATE</span><strong>Constrain aircraft paths</strong><small>Airport continuity, availability, turnaround, delay choices and no flight reuse.</small></div>
+        <div><span>02 / VALIDATE</span><strong>Challenge the solver</strong><small>Independent small permutation oracle checks an overtaking counterexample.</small></div>
+        <div><span>03 / BENCHMARK</span><strong>Compare feasible policies</strong><small>Cost-aware greedy, fly-first greedy, and all-cancel on the same seeded cases.</small></div>
+      </div>
+    </section>
+
+    <section id="benchmarks">
+      <h2>30 reproducible synthetic scenarios</h2>
+      <p>The benchmark generated <strong>30 fictional five-flight, two-tail problems</strong> with an explicit seed and scenario checksums. Every method used the same flight options and objective units. The cost-aware greedy comparator, unlike the original fly-first policy, considers canceling a flight when its immediate delay penalty exceeds the cancellation penalty.</p>
+      <div class="case-table-scroll" role="region" aria-label="Mean illustrative recovery objective comparison" tabindex="0">
+        <table class="case-results-table">
+          <caption>Average modeled objective · arbitrary illustrative units · lower is better</caption>
+          <thead><tr><th scope="col">Decision method</th><th scope="col">Mean objective</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Exact finite MILP</th><td><strong>413.62</strong></td></tr>
+            <tr><th scope="row">Cost-aware greedy</th><td>503.67</td></tr>
+            <tr><th scope="row">All-cancel</th><td>1,269.00</td></tr>
+            <tr><th scope="row">Original fly-first greedy</th><td>2,109.03</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <figure class="ops-figure" aria-labelledby="recovery-chart-title">
+        <figcaption id="recovery-chart-title">Modeled average penalty · bar lengths relative to fly-first (100%), not financial savings</figcaption>
+        <div class="ops-bar-row"><span>MILP</span><div class="ops-bar-track"><div class="ops-bar-fill" style="width:19.61%"></div></div><strong>413.62</strong></div>
+        <div class="ops-bar-row"><span>Cost-aware</span><div class="ops-bar-track"><div class="ops-bar-fill ops-bar-muted" style="width:23.88%"></div></div><strong>503.67</strong></div>
+        <div class="ops-bar-row"><span>All-cancel</span><div class="ops-bar-track"><div class="ops-bar-fill ops-bar-muted" style="width:60.17%"></div></div><strong>1,269</strong></div>
+        <div class="ops-bar-row"><span>Fly-first</span><div class="ops-bar-track"><div class="ops-bar-fill ops-bar-muted" style="width:100%"></div></div><strong>2,109</strong></div>
+      </figure>
+      <p>Against cost-aware greedy, the MILP was better in <strong>12 cases</strong>, tied in <strong>18</strong> and worse in none. The mean difference was <strong>90.05 illustrative units</strong>. The much larger difference against fly-first is less meaningful because that policy is intentionally weak. These results are <strong>not real airline savings</strong>.</p>
+    </section>
+
+    <section id="finding" class="case-finding">
+      <h2>The operational takeaway</h2>
+      <p>A stronger baseline substantially changes how impressive an optimization result appears. The useful lesson is not a monetary percentage: it is that <strong>aircraft positioning, operating constraints and an explicit cancellation option</strong> can be formulated, tested and compared against transparent decision policies.</p>
+      <p>That is the analytical skill I would bring to an operations team: define the decision, explain the constraints, compare credible alternatives and state clearly what the evidence does—and does not—support.</p>
+    </section>
+
+    <section class="case-method" id="limits">
+      <h2>What remains outside this model</h2>
+      <p>The experiment does not include real airline schedules, crew legality, maintenance, airport slots, actual passenger connections, aircraft type compatibility, curfews, recovery across days or a complete network model. It is exact only within enumerated paths and discrete delays and stops if enumeration becomes too large. The scenarios are intentionally tiny and highly structured, so their results cannot establish industry-scale optimizer performance or practical recovery savings.</p>
+      <p>The full 30-case benchmark passed <strong>11 focused tests</strong> and was run a second time with <strong>byte-for-byte identical output</strong>. The older ad-hoc synthetic benchmark used a different generator and is not directly comparable. No frozen Network Lab route-screening finding was changed.</p>
+      <div class="case-source-links">
+        <a href="https://github.com/yumorepos/network-lab/blob/main/experiments/disruption_recovery/BASELINE_AUDIT_RESULTS.md" target="_blank" rel="noopener noreferrer">Measured comparison &amp; caveats ↗</a>
+        <a href="https://github.com/yumorepos/network-lab/actions/runs/43094153033" target="_blank" rel="noopener noreferrer">Exact rerun verification ↗</a>
+        <a href="https://github.com/yumorepos/network-lab/blob/main/tests/test_disruption_recovery_experiment.py" target="_blank" rel="noopener noreferrer">Independent permutation oracle ↗</a>
+        <a href="airline-operations.html">Operational reliability case study →</a>
+        <a href="network-lab.html">Network Lab case study →</a>
+      </div>
+    </section>
+  </article>
+  <div class="case-bottom-cta">
+    <h2>Interested in practical aviation analytics?</h2>
+    <a class="btn btn-secondary" href="index.html#contact">Get in touch →</a>
+  </div>
+</div>
+</main>
+<footer class="footer"><div class="container">Yumo Xu · 2026</div></footer>
+</body>
+</html>
