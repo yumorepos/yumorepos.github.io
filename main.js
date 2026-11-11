@@ -18,12 +18,14 @@
     menuBtn.addEventListener('click', () => {
       menuBtn.classList.toggle('active');
       mobileMenu.classList.toggle('active');
+      menuBtn.setAttribute('aria-expanded', String(menuBtn.classList.contains('active')));
     });
 
     mobileMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         menuBtn.classList.remove('active');
         mobileMenu.classList.remove('active');
+        menuBtn.setAttribute('aria-expanded', 'false');
       });
     });
   }
