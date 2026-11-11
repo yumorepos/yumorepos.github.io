@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Airline operational reliability: a reproducible Delta BTS 2025 data-quality and observed aircraft-connection study using Python and SQLite, with carefully bounded findings.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Airline Operational Performance &amp; Reliability | Yumo Xu">
+  <meta property="og:url" content="https://yumorepos.github.io/airline-operations.html">
+  <meta property="og:description" content="Validating airline schedule adherence, gate timestamps and observed same-tail connections without unsupported causal claims.">
+  <title>Airline Operational Performance &amp; Reliability | Yumo Xu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+<body class="case-page">
+<nav class="nav case-nav" aria-label="Case study navigation">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">yumo<span class="accent">.</span></a>
+    <a class="case-back" href="index.html#projects">← Back to projects</a>
+  </div>
+</nav>
+<main class="case-main">
+<div class="container case-container">
+  <header class="case-hero">
+    <div class="section-label">CASE STUDY 02 / AIRLINE OPERATIONS ANALYTICS</div>
+    <h1>Flight reliability<span class="case-dot">.</span><br>Evidence first.</h1>
+    <p class="case-lede">Using public flight records to measure schedule adherence, reconstruct airport-local gate times and test whether reported aircraft connections are reliable enough to analyze.</p>
+    <div class="case-tags">
+      <span class="tag">Python</span><span class="tag">SQL / SQLite</span>
+      <span class="tag">Data quality</span><span class="tag">Aviation</span>
+      <span class="tag">Operational KPIs</span>
+    </div>
+    <div class="case-actions">
+      <a class="btn btn-primary" href="https://github.com/yumorepos/fleet-tracker" target="_blank" rel="noopener noreferrer">View source repository ↗</a>
+      <a class="btn btn-secondary" href="https://github.com/yumorepos/fleet-tracker/blob/main/docs/BTS_TAIL_SEQUENCE_2025_RESULTS.md" target="_blank" rel="noopener noreferrer">Read validation results ↗</a>
+    </div>
+  </header>
+  <div class="case-snapshot" aria-label="Study summary">
+    <div><span class="case-mini-label">SAMPLE</span><strong>170,372 scheduled Delta-reporting records · Jan &amp; Jul 2025</strong></div>
+    <div><span class="case-mini-label">DATA QUALITY</span><strong>99.996% Jan / 100% Jul validated gate timestamps</strong></div>
+    <div><span class="case-mini-label">FINDING</span><strong>Aircraft connections observable; causal propagation unproven</strong></div>
+  </div>
+
+  <article class="case-article">
+    <section id="problem">
+      <h2>Business problem</h2>
+      <p>Arrival punctuality and cancellation rates can be calculated from public data, but airline operations questions get harder when they involve aircraft history. A missing flight, misread time zone or changed airport identifier can make a supposed turnaround wrong.</p>
+      <p>I wanted to answer two practical questions: <strong>How dependable are basic operational KPIs?</strong> And <strong>can consecutive reported flights from the same aircraft be linked without inventing activity we cannot observe?</strong></p>
+    </section>
+
+    <section id="data">
+      <h2>Data and reporting population</h2>
+      <p>I used the U.S. Bureau of Transportation Statistics Reporting Carrier On-Time Performance files for <strong>January and July 2025</strong>, filtering the reporting-airline code to <strong>DL</strong>. This is a sample of reported U.S. domestic operations, not Delta's complete global network or necessarily every Delta-marketed partner flight.</p>
+      <p>Source ZIP hashes, source-field contracts, exclusions and metric denominators are documented in the <a class="case-inline-link" href="https://github.com/yumorepos/fleet-tracker/blob/main/docs/BTS_DELTA_PILOT_2025_RESULTS.md" target="_blank" rel="noopener noreferrer">data-quality results</a>. January and July are separate descriptive samples, not a controlled seasonal experiment.</p>
+      <div class="case-process" aria-label="Analysis method">
+        <div><span>01 / DEFINE</span><strong>Establish the denominators</strong><small>Separate scheduled flights, cancellations, diversions and eligible arrival flags.</small></div>
+        <div><span>02 / RECONSTRUCT</span><strong>Validate gate timestamps</strong><small>Convert airport-local clocks to UTC and cross-check reported elapsed times.</small></div>
+        <div><span>03 / CHALLENGE</span><strong>Recalculate independently</strong><small>Use SQL window functions to reproduce same-tail connections and delay count quadrants.</small></div>
+      </div>
+    </section>
+
+    <section id="performance">
+      <h2>Operational KPI results</h2>
+      <div class="case-table-scroll" role="region" aria-label="Delta flight reliability measures" tabindex="0">
+        <table class="case-results-table">
+          <caption>Reported DL domestic flight operations; separate monthly snapshots</caption>
+          <thead><tr><th scope="col">Measure</th><th scope="col">January 2025</th><th scope="col">July 2025</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Scheduled records</th><td>76,306</td><td>94,066</td></tr>
+            <tr><th scope="row">Arrival on-time rate</th><td>80.68%</td><td>75.16%</td></tr>
+            <tr><th scope="row">Cancellation rate</th><td>2.80%</td><td>1.40%</td></tr>
+            <tr><th scope="row">Diversion rate</th><td>0.19%</td><td>0.53%</td></tr>
+            <tr><th scope="row">On-time denominator</th><td>74,025</td><td>92,245</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="case-table-note"><strong>On-time arrivals</strong> = arrivals under 15 minutes late / non-canceled, non-diverted reported flights with a valid arrival-delay flag. <strong>Cancellation and diversion rates</strong> use all scheduled DL records. The July–January difference is descriptive: flight and route mixes differ, and no weather or seasonal cause was identified.</p>
+    </section>
+
+    <section id="connections">
+      <h2>Can we observe aircraft connections?</h2>
+      <p>Gate times were checked against airport time zones, scheduled and actual elapsed times, and reported delays. A historical airport-code change created a concrete data-quality issue: PBI was missing from a current airport mapping even though the 2025 flights still used that code. I added one documented historical-code time-zone exception and repeated all clock checks.</p>
+      <div class="case-evidence-grid">
+        <div><strong>53,047</strong><span>January candidate same-tail, same-airport connections</span></div>
+        <div><strong>71,881</strong><span>July candidate connections</span></div>
+        <div><strong>77 / 74 min</strong><span>Median observed candidate ground gap · Jan / Jul</span></div>
+      </div>
+      <p>Each <strong>candidate</strong> requires consecutive reported flights from one tail, matching airports, valid gate timestamps and a non-overlapping ground interval of 20–360 minutes. Those limits are analytical screening rules, <strong>not certified airline turnaround minimums</strong>. Unreported international operations or other missing legs can interrupt the real aircraft history.</p>
+    </section>
+
+    <section id="association">
+      <h2>What happens after a late inbound?</h2>
+      <p>Within the selected candidate pairs, I compared the share of next departures delayed by at least 15 minutes after a late previous arrival versus a not-late previous arrival.</p>
+      <figure class="ops-figure" aria-labelledby="ops-chart-heading">
+        <figcaption id="ops-chart-heading">Next departure delayed ≥15 minutes · conditional share among observed candidate connections</figcaption>
+        <div class="ops-bar-row"><span>Jan · inbound late</span><div class="ops-bar-track"><div class="ops-bar-fill" style="width:66.63%"></div></div><strong>66.63%</strong></div>
+        <div class="ops-bar-row"><span>Jan · inbound not late</span><div class="ops-bar-track"><div class="ops-bar-fill ops-bar-muted" style="width:10.43%"></div></div><strong>10.43%</strong></div>
+        <div class="ops-bar-row"><span>Jul · inbound late</span><div class="ops-bar-track"><div class="ops-bar-fill" style="width:68.54%"></div></div><strong>68.54%</strong></div>
+        <div class="ops-bar-row"><span>Jul · inbound not late</span><div class="ops-bar-track"><div class="ops-bar-fill ops-bar-muted" style="width:14.70%"></div></div><strong>14.70%</strong></div>
+      </figure>
+      <p>The overall association is substantial, but it <strong>does not prove that the inbound delay caused the next departure delay</strong>. A useful warning came from July's longer 120–360-minute gap group: the pattern reversed, with 28.90% next-departure delays after late inbounds versus 40.39% after not-late inbounds. Common congestion, scheduling, weather, missing flights and selecting on realized ground intervals can distort these comparisons.</p>
+    </section>
+
+    <section class="case-finding" id="decision">
+      <h2>What this means for an operations team</h2>
+      <p>The two-month sample can support <strong>transparent historical punctuality reporting</strong> and screening of <strong>observed aircraft connections</strong>. It does not yet support full fleet utilization, maintenance events, an operationally complete rotation map, a causal delay-propagation estimate or a claim of preventable delay savings.</p>
+      <p>My recommended decision is to use the validated KPIs for descriptive operational monitoring and require a broader reporting window, completeness review and more rigorous controls before making stronger disruption-recovery claims.</p>
+    </section>
+
+    <section class="case-method" id="validation">
+      <h2>Validation, exceptions and reproducibility</h2>
+      <p><strong>Independent verification:</strong> a second implementation reconstructed arrival UTC from actual elapsed minutes and reproduced the tail connections and late-departure count quadrants using SQLite window functions. It exactly matched the primary analysis for both months. The final run passed <strong>27 offline tests</strong>.</p>
+      <p><strong>Exceptions retained:</strong> three January flight records failed the scheduled-arrival clock check, and two July observed same-tail pairs overlapped. Neither was silently repaired. The same-tail connection results remain candidates, not verified complete aircraft rotations.</p>
+      <div class="case-source-links">
+        <a href="https://github.com/yumorepos/fleet-tracker/blob/main/docs/BTS_TAIL_SEQUENCE_2025_RESULTS.md" target="_blank" rel="noopener noreferrer">Full result and limitation register ↗</a>
+        <a href="https://github.com/yumorepos/fleet-tracker/actions/runs/43092083056" target="_blank" rel="noopener noreferrer">Independent source-data validation ↗</a>
+        <a href="https://www.bts.gov/explore-topics-and-geography/modes/aviation/number-39-technical-directive-reporting-time" target="_blank" rel="noopener noreferrer">BTS reporting definitions ↗</a>
+        <a href="network-lab.html">Network Lab case study →</a>
+      </div>
+    </section>
+  </article>
+  <div class="case-bottom-cta">
+    <h2>Interested in aviation analytics?</h2>
+    <a class="btn btn-secondary" href="index.html#contact">Get in touch →</a>
+  </div>
+</div>
+</main>
+<footer class="footer"><div class="container">Yumo Xu · 2026</div></footer>
+</body>
+</html>
