@@ -995,3 +995,14 @@ body.loaded .hero-content {
 .case-audit-details{border:1px solid var(--border-hover);border-radius:var(--radius-lg);padding:16px 18px 4px;margin:16px 0 22px}
 .case-audit-details summary{cursor:pointer;color:var(--text);font-weight:600;padding:0 0 12px}
 @media(max-width:600px){.case-evidence-grid{grid-template-columns:1fr}}
+
+/* Airline operations: static, accessible, responsive comparison chart */
+.ops-figure{border:1px solid var(--border-hover);background:var(--bg-card);border-radius:var(--radius-lg);padding:22px;margin:20px 0 17px}
+.ops-figure figcaption{font-size:.85rem;color:var(--text-secondary);line-height:1.5;margin-bottom:20px}
+.ops-bar-row{display:grid;grid-template-columns:165px minmax(0,1fr) 68px;align-items:center;gap:13px;margin:13px 0;font-size:.82rem}
+.ops-bar-row>span{color:var(--text-secondary)}
+.ops-bar-row strong{font-size:.9rem;text-align:right;font-variant-numeric:tabular-nums}
+.ops-bar-track{height:13px;background:var(--bg-elevated);border-radius:7px;overflow:hidden;border:1px solid var(--border-hover)}
+.ops-bar-fill{height:100%;border-radius:7px;background:var(--accent);min-width:1px}
+.ops-bar-muted{background:var(--text-secondary)}
+@media(max-width:600px){.ops-bar-row{grid-template-columns:1fr 68px;gap:7px 12px}.ops-bar-row>span{grid-column:1 / -1}.ops-figure{padding:16px}}
