@@ -64,7 +64,10 @@ class AirlineOperationsCaseStudy(unittest.TestCase):
                 self.assertIn(anchor,scanner.ids,url)
 
     def test_comparison_chart_is_data_labeled_and_mobile_styled(self):
-        widths=re.findall(r'class="ops-bar-fill[^"]*"\s+style="width:(\d+\.\d+)%"',self.page)
+        # Limit this legacy check to the original same-tail association graphic.
+        # New independently sourced charts must have their own explicit tests.
+        original=self.page.split('id="association"',1)[1].split('id="decision"',1)[0]
+        widths=re.findall(r'class="ops-bar-fill[^"]*"\s+style="width:(\d+\.\d+)%"',original)
         self.assertEqual(widths,["66.63","10.43","68.54","14.70"])
         style=(ROOT/"style.css").read_text()
         self.assertIn("@media(max-width:600px){.ops-bar-row",style)

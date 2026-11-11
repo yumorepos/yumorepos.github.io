@@ -79,6 +79,33 @@
       <p class="case-table-note"><strong>On-time arrivals</strong> = arrivals under 15 minutes late / non-canceled, non-diverted reported flights with a valid arrival-delay flag. <strong>Cancellation and diversion rates</strong> use all scheduled DL records. The July–January difference is descriptive: flight and route mixes differ, and no weather or seasonal cause was identified.</p>
     </section>
 
+    <section id="origin-comparison">
+      <h2>Where would I investigate first?</h2>
+      <p>I segmented the same verified <strong>DL reporting-carrier domestic flights</strong> into those departing Atlanta (ATL) and those departing every other airport. The source rows and arrival denominators reconcile exactly with the overall January and July KPIs above. This is an exploratory comparison, not an estimate of an ATL airport effect.</p>
+      <div class="case-table-scroll" role="region" aria-label="Arrival on-time by departure origin" tabindex="0">
+        <table class="case-results-table">
+          <caption>On-time arrivals / completed nondiverted flight records · two separate months</caption>
+          <thead><tr><th scope="col">Departure segment</th><th scope="col">January 2025</th><th scope="col">July 2025</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">ATL origin</th><td>12,777 / 16,598 <strong>(76.98%)</strong></td><td>14,993 / 21,492 <strong>(69.76%)</strong></td></tr>
+            <tr><th scope="row">Other origins</th><td>46,946 / 57,427 <strong>(81.75%)</strong></td><td>54,334 / 70,753 <strong>(76.79%)</strong></td></tr>
+            <tr><th scope="row">ATL minus other</th><td>−4.77 pp</td><td>−7.03 pp</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>ATL-origin flights had lower observed arrival punctuality in both months. However, the route mix, destination, scheduled departure bank, aircraft allocation and operating conditions differ. This comparison alone cannot tell us whether a process at ATL caused the gap.</p>
+      <figure class="ops-figure" aria-labelledby="reported-late-aircraft-title">
+        <figcaption id="reported-late-aircraft-title">Among late-arriving flights with complete cause records: share with positive carrier-reported <strong>LateAircraftDelay</strong> minutes (0–100% scale)</figcaption>
+        <div class="ops-bar-row"><span>Jan · ATL origin</span><div class="ops-bar-track"><div class="ops-bar-fill" style="width:30.67%"></div></div><strong>30.67%</strong></div>
+        <div class="ops-bar-row"><span>Jan · other origins</span><div class="ops-bar-track"><div class="ops-bar-fill ops-bar-muted" style="width:42.50%"></div></div><strong>42.50%</strong></div>
+        <div class="ops-bar-row"><span>Jul · ATL origin</span><div class="ops-bar-track"><div class="ops-bar-fill" style="width:37.22%"></div></div><strong>37.22%</strong></div>
+        <div class="ops-bar-row"><span>Jul · other origins</span><div class="ops-bar-track"><div class="ops-bar-fill ops-bar-muted" style="width:49.84%"></div></div><strong>49.84%</strong></div>
+      </figure>
+      <p class="case-table-note">Reported positive late-aircraft counts: Jan 1,172 / 3,821 ATL and 4,454 / 10,481 other; Jul 2,419 / 6,499 ATL and 8,184 / 16,419 other. All 37,220 late-arrival records across both months had complete cause details, and their reported cause minutes reconciled to arrival delay. BTS causes are <strong>carrier-reported attribution</strong> on flights arriving at least 15 minutes late, not an independently linked causal explanation of the prior flight. Multiple delay causes may appear on the same flight.</p>
+      <p><strong>Operational next question:</strong> Within ATL-origin departures, which scheduled banks, destinations and routes explain the largest share of late arrivals after accounting for the flight mix? I would investigate those groups before recommending changes to turnaround, staffing or dispatch. Neither the raw gap nor the reported cause mix supports a specific intervention yet.</p>
+      <p><a class="case-inline-link" href="https://github.com/yumorepos/fleet-tracker/blob/main/docs/BTS_DELTA_SEGMENT_2025_RESULTS.md" target="_blank" rel="noopener noreferrer">Read the verified source-data and independent SQL results ↗</a></p>
+    </section>
+
     <section id="connections">
       <h2>Can we observe aircraft connections?</h2>
       <p>Gate times were checked against airport time zones, scheduled and actual elapsed times, and reported delays. A historical airport-code change created a concrete data-quality issue: PBI was missing from a current airport mapping even though the 2025 flights still used that code. I added one documented historical-code time-zone exception and repeated all clock checks.</p>
