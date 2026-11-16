@@ -10,7 +10,7 @@ This repository hosts a public, recruiter-facing technical portfolio focused on 
 | --- | --- | --- |
 | [01 · Airline Network Planning & Model Validation](network-lab.html) | Python/DuckDB route screening, source reconciliation and historical replay against a demand-only baseline | No detectable incremental ranking lift at the study's resolution; not a validated route-success predictor |
 | [02 · Airline Operational Performance & Reliability](airline-operations.html) | Verified BTS Delta Jan/Jul 2025 domestic reporting-carrier KPIs, local-time reconstruction and independently checked SQL aircraft-connection candidates | Two descriptive snapshots; candidate aircraft connections are not complete rotations, and delay associations are not causal |
-| [03 · Disruption Recovery Optimization](disruption-recovery.html) | Small synthetic mixed-integer recovery model, finite reference verification and comparisons against a cost-aware greedy policy | Fictional inputs; no measured airline operating savings or production deployment |
+| [03 · Disruption Recovery Optimization](disruption-recovery.html) | [Synthetic MILP experiment](https://github.com/yumorepos/network-lab/tree/main/experiments/disruption_recovery), finite reference verification and cost-aware greedy comparison | Fictional inputs; no measured airline operating savings or production deployment |
 
 **Source repositories:** [Network Lab](https://github.com/yumorepos/network-lab) · [Fleet Tracker (Delta reliability study)](https://github.com/yumorepos/fleet-tracker) · [Avgeek Intelligence Lab (selectively reusable, some demo modules)](https://github.com/yumorepos/avgeek-intelligence-lab).
 
