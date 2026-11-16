@@ -4,27 +4,30 @@
 
 This repository hosts a public, recruiter-facing technical portfolio focused on **airline operations analytics, network planning, geospatial data, data engineering and decision support**.
 
-## Featured project: Network Lab
+## Three flagship aviation case studies
 
-Network Lab screens potential routes across three fixed-aircraft, configured-schedule studies using public government aviation data. The project presents clear methods, source verification, a 200-market research snapshot, and a point-in-time replay of 463 historical candidate decisions.
+| Case study | What it demonstrates | Evidence boundary |
+| --- | --- | --- |
+| [01 · Airline Network Planning & Model Validation](network-lab.html) | Python/DuckDB route screening, source reconciliation and historical replay against a demand-only baseline | No detectable incremental ranking lift at the study's resolution; not a validated route-success predictor |
+| [02 · Airline Operational Performance & Reliability](airline-operations.html) | Verified BTS Delta Jan/Jul 2025 domestic reporting-carrier KPIs, local-time reconstruction and independently checked SQL aircraft-connection candidates | Two descriptive snapshots; candidate aircraft connections are not complete rotations, and delay associations are not causal |
+| [03 · Disruption Recovery Optimization](disruption-recovery.html) | [Synthetic MILP experiment](https://github.com/yumorepos/network-lab/tree/main/experiments/disruption_recovery), finite reference verification and cost-aware greedy comparison | Fictional inputs; no measured airline operating savings or production deployment |
 
-**Evidence boundary:** Historical testing found **no detectable incremental ranking value** over a demand-only baseline at effects larger than the study's resolution. Smaller improvements remain unresolved. Network Lab is research-grade *fixed-gauge screening*, not a validated route-success predictor or live airline operations product.
+**Source repositories:** [Network Lab](https://github.com/yumorepos/network-lab) · [Fleet Tracker (Delta reliability study)](https://github.com/yumorepos/fleet-tracker) · [Avgeek Intelligence Lab (selectively reusable, some demo modules)](https://github.com/yumorepos/avgeek-intelligence-lab).
 
-- [Case study and visual summary](network-lab.html)
-- [Source repository and reproducibility](https://github.com/yumorepos/network-lab)
-- [Scope and assumptions](https://github.com/yumorepos/network-lab/blob/main/docs/FINAL_SCOPE_CONTRACT.md)
-- [Limitations and historical audit](https://github.com/yumorepos/network-lab/blob/main/docs/LIMITATIONS.md)
+The three case studies are the primary portfolio. Other projects on the site are labeled separately and should not be interpreted as operational airline products. Each study documents its question, methods, verification, decision implications, and limitations.
 
-## Site structure
+## Website structure
 
 | Path | Purpose |
-|---|---|
-| `index.html` | Homepage, skills, and project selection |
-| `network-lab.html` | Primary aviation analytics case study |
-| `case-study.html` | Clearly labeled archived engineering project |
+| --- | --- |
+| `index.html` | Homepage and three-study portfolio overview |
+| `network-lab.html` | Network planning and validation case study |
+| `airline-operations.html` | Historical Delta operational reliability study |
+| `disruption-recovery.html` | Synthetic operations research and optimization study |
+| `case-study.html` | Archived, separately labeled engineering work |
 | `style.css`, `main.js` | Shared presentation and interactions |
-| `tests/` | Link, evidence and public-tree guard tests |
-| `.github/workflows/ci.yml` | Checks run on push and pull requests |
+| `tests/`, `scripts/` | Link, research-claim, public-tree, browser and accessibility checks |
+| `.github/workflows/` | Automated source and browser-related checks |
 
 The website is static HTML/CSS/JavaScript, hosted on GitHub Pages. The separate Streamlit dashboard is deployed from the Network Lab repository.
 
