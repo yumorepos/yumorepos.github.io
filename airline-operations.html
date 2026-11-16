@@ -102,8 +102,39 @@
         <div class="ops-bar-row"><span>Jul · other origins</span><div class="ops-bar-track"><div class="ops-bar-fill ops-bar-muted" style="width:49.84%"></div></div><strong>49.84%</strong></div>
       </figure>
       <p class="case-table-note">Reported positive late-aircraft counts: Jan 1,172 / 3,821 ATL and 4,454 / 10,481 other; Jul 2,419 / 6,499 ATL and 8,184 / 16,419 other. All 37,220 late-arrival records across both months had complete cause details, and their reported cause minutes reconciled to arrival delay. BTS causes are <strong>carrier-reported attribution</strong> on flights arriving at least 15 minutes late, not an independently linked causal explanation of the prior flight. Multiple delay causes may appear on the same flight.</p>
-      <p><strong>Operational next question:</strong> Within ATL-origin departures, which scheduled banks, destinations and routes explain the largest share of late arrivals after accounting for the flight mix? I would investigate those groups before recommending changes to turnaround, staffing or dispatch. Neither the raw gap nor the reported cause mix supports a specific intervention yet.</p>
+      <p><strong>Follow-up completed:</strong> I tested whether the observed gap changes across broad scheduled departure periods and selected common destinations. <a class="case-inline-link" href="#departure-banks">See the verified departure-bank comparison ↓</a>. Neither the raw gap nor the reported cause mix supports a specific intervention yet.</p>
       <p><a class="case-inline-link" href="https://github.com/yumorepos/fleet-tracker/blob/main/docs/BTS_DELTA_SEGMENT_2025_RESULTS.md" target="_blank" rel="noopener noreferrer">Read the verified source-data and independent SQL results ↗</a></p>
+    </section>
+
+    <section id="departure-banks">
+      <h2>Does the gap change by departure period?</h2>
+      <p>I followed up with a <strong>source-reconciled departure-time study</strong> using the same two BTS samples. Flights were grouped by six-hour <strong>scheduled origin-local departure periods</strong>, not airline-defined hub banks. Independent SQLite re-aggregation reproduced the flight counts and the shared-destination comparisons.</p>
+      <figure class="ops-figure" aria-labelledby="bank-gap-heading">
+        <figcaption id="bank-gap-heading">Observed arrival-punctuality shortfall for ATL-origin flights versus other origins, in percentage points. All six comparable gaps were negative. Bars show the <strong>absolute size</strong> of the shortfall on a 0–10 percentage-point scale; labels retain the minus sign.</figcaption>
+        <div class="ops-bar-row"><span>Jan · 06–11</span><div class="ops-bar-track" aria-hidden="true"><div class="ops-bar-fill" style="width:67%"></div></div><strong>−6.70 pp</strong></div>
+        <div class="ops-bar-row"><span>Jan · 12–17</span><div class="ops-bar-track" aria-hidden="true"><div class="ops-bar-fill" style="width:24.5%"></div></div><strong>−2.45 pp</strong></div>
+        <div class="ops-bar-row"><span>Jan · 18–23</span><div class="ops-bar-track" aria-hidden="true"><div class="ops-bar-fill" style="width:28.9%"></div></div><strong>−2.89 pp</strong></div>
+        <div class="ops-bar-row"><span>Jul · 06–11</span><div class="ops-bar-track" aria-hidden="true"><div class="ops-bar-fill ops-bar-muted" style="width:1.5%"></div></div><strong>−0.15 pp</strong></div>
+        <div class="ops-bar-row"><span>Jul · 12–17</span><div class="ops-bar-track" aria-hidden="true"><div class="ops-bar-fill ops-bar-muted" style="width:51.5%"></div></div><strong>−5.15 pp</strong></div>
+        <div class="ops-bar-row"><span>Jul · 18–23</span><div class="ops-bar-track" aria-hidden="true"><div class="ops-bar-fill ops-bar-muted" style="width:56.1%"></div></div><strong>−5.61 pp</strong></div>
+      </figure>
+      <div class="case-table-scroll" role="region" aria-label="Departure-bank source counts and on-time rates, horizontally scrollable" tabindex="0">
+        <table class="case-results-table">
+          <caption>On-time / valid completed flights (rate); gap = ATL minus other. Jan and Jul 2025 only.</caption>
+          <thead><tr><th scope="col">Month · local clock</th><th scope="col">ATL origin</th><th scope="col">Other origins</th><th scope="col">Gap</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Jan · 06–11</th><td>4,334 / 5,601 (77.38%)</td><td>20,715 / 24,637 (84.08%)</td><td>−6.70 pp</td></tr>
+            <tr><th scope="row">Jan · 12–17</th><td>4,320 / 5,597 (77.18%)</td><td>16,178 / 20,315 (79.64%)</td><td>−2.45 pp</td></tr>
+            <tr><th scope="row">Jan · 18–23</th><td>4,123 / 5,400 (76.35%)</td><td>8,257 / 10,420 (79.24%)</td><td>−2.89 pp</td></tr>
+            <tr><th scope="row">Jul · 06–11</th><td>6,028 / 6,957 (86.65%)</td><td>25,900 / 29,839 (86.80%)</td><td>−0.15 pp</td></tr>
+            <tr><th scope="row">Jul · 12–17</th><td>5,013 / 7,594 (66.01%)</td><td>16,816 / 23,632 (71.16%)</td><td>−5.15 pp</td></tr>
+            <tr><th scope="row">Jul · 18–23</th><td>3,952 / 6,941 (56.94%)</td><td>9,103 / 14,553 (62.55%)</td><td>−5.61 pp</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="case-table-note">There were <strong>no ATL-origin scheduled flights in the 00–05 local-clock bin</strong> in either month; the other-origin bin cannot be compared to ATL. Every displayed denominator excludes canceled and diverted flights and requires a valid <code>ArrDel15</code> flag. These are coarse analytic periods, not verified airline wave schedules.</p>
+      <p><strong>Destination-mix check:</strong> restricting to destinations and local periods with at least 25 completed arrivals in <em>each</em> origin group retained <strong>60.77% of ATL and 66.17% of other-origin eligible flights in January</strong> (150 shared groups), and <strong>63.01% and 65.39% in July</strong> (174 groups). The pooled, descriptively standardized ATL-minus-other gaps were <strong>−5.28 pp</strong> and <strong>−2.52 pp</strong>. The match excludes a substantial share of flights and holds destination, not the actual route, constant. It is <strong>not a causal adjustment</strong> or proof that departure bank or destination mix explains the gap.</p>
+      <p><strong>Operational implication:</strong> the July later-period difference is worth investigating alongside route mix, airport congestion and weather, but this evidence does not support staffing, turnaround or dispatch changes by itself. <a class="case-inline-link" href="https://github.com/yumorepos/fleet-tracker/blob/main/docs/BTS_DEPARTURE_BANK_DESTINATION_MIX_2025_RESULTS.md" target="_blank" rel="noopener noreferrer">Read the complete independently verified departure-bank results ↗</a></p>
     </section>
 
     <section id="connections">
