@@ -78,3 +78,10 @@ report is scoped to those browser widths, source snapshots and checks;
 it is not a complete screen-reader audit or verification of external
 provider link freshness. All automated browser workflow runs remain
 **manual-only** by default to minimize ongoing portfolio costs.
+
+
+## Research exhibit regression — November 16, 2026
+
+The aviation case-study browser QA now runs on **relevant pull requests** and by manual dispatch (never on a schedule). It adds assertions for all six reported Delta departure-bank comparison rows, six labeled shortfall bars, and horizontal keyboard-scroll support at 320px and 390px. This targeted automation costs hosted runner time only when the affected pages or QA code change. Source-level checks separately verify counts, denominator reconciliation, rates, and the published limits.
+
+Headless Chromium layouts and saved screenshots improve confidence, but a human must still assess visual quality and chart communication. The official BTS analysis and independent source-aggregation verification remain in the Fleet Tracker repository.

@@ -1,6 +1,14 @@
-# Bounded browser/viewport QA. No publication, new app or data fetch.
+# Bounded browser/viewport QA on relevant PRs or manual dispatch.
+# No scheduled run, publication, new app, or live aviation-data fetch.
 name: Portfolio viewport and navigation QA
 on:
+  pull_request:
+    paths:
+      - "airline-operations.html"
+      - "style.css"
+      - "scripts/portfolio_browser_qa.py"
+      - "tests/test_delta_bank_exhibit.py"
+      - ".github/workflows/portfolio-browser-qa.yml"
   workflow_dispatch:
 permissions:
   contents: read

@@ -45,7 +45,7 @@ class SegmentedEvidence(unittest.TestCase):
         self.assertIn('github.com/yumorepos/fleet-tracker/blob/main/docs/BTS_DELTA_SEGMENT_2025_RESULTS.md',PAGE)
 
     def test_chart_is_labeled_and_does_not_reuse_full_population_denominator(self):
-        section=PAGE.split('id="origin-comparison"',1)[1].split('id="connections"',1)[0]
+        section=PAGE.split('id="origin-comparison"',1)[1].split('id="departure-banks"',1)[0]
         values=re.findall(r'class="ops-bar-fill[^"]*"\s+style="width:([\d.]+)%"',section)
         self.assertEqual(values,["30.67","42.50","37.22","49.84"])
         self.assertIn("late-arriving flights with complete cause records",section)

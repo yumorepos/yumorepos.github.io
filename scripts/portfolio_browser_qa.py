@@ -83,6 +83,22 @@ def run(output:Path):
                             issues.append(f"{tag}: missing origin KPI comparison rows")
                         if page.locator("#origin-comparison .ops-bar-row").count()!=4:
                             issues.append(f"{tag}: missing carrier-reported cause comparisons")
+                        if page.locator("#departure-banks .case-results-table tbody tr").count()!=6:
+                            issues.append(f"{tag}: expected six validated bank comparison rows")
+                        if page.locator("#departure-banks .ops-bar-row").count()!=6:
+                            issues.append(f"{tag}: expected six labeled bank shortfall bars")
+                        if width<=390:
+                            region=page.locator("#departure-banks .case-table-scroll")
+                            if region.count()!=1:
+                                issues.append(f"{tag}: missing scrollable bank table")
+                            else:
+                                geo=region.evaluate("""el=>({
+                                    outer:el.clientWidth,inner:el.scrollWidth,
+                                    role:el.getAttribute('role'),focus:el.getAttribute('tabindex')
+                                })""")
+                                if (geo["inner"]<=geo["outer"] or geo["role"]!="region"
+                                        or geo["focus"]!="0"):
+                                    issues.append(f"{tag}: bank table horizontal keyboard scroll invalid: {geo}")
                     if filename=="disruption-recovery.html":
                         if page.locator("#sensitivity .case-results-table tbody tr").count()!=5:
                             issues.append(f"{tag}: missing five synthetic sensitivity variants")
