@@ -21,7 +21,7 @@ BANKS = [
 class DeltaDepartureBankExhibit(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.section = HTML.split('id="departure-banks"', 1)[1].split('id="connections"', 1)[0]
+        cls.section = HTML.split('id="departure-banks"', 1)[1].split('id="day-resampling"', 1)[0]
 
     def test_original_origin_population_reconstructs_across_banks(self):
         # Overnight ATL = 0 / 0; other-origin overnight excludes direct comparison.

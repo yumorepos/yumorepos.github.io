@@ -137,6 +137,24 @@
       <p><strong>Operational implication:</strong> the July later-period difference is worth investigating alongside route mix, airport congestion and weather, but this evidence does not support staffing, turnaround or dispatch changes by itself. <a class="case-inline-link" href="https://github.com/yumorepos/fleet-tracker/blob/main/docs/BTS_DEPARTURE_BANK_DESTINATION_MIX_2025_RESULTS.md" target="_blank" rel="noopener noreferrer">Read the complete independently verified departure-bank results ↗</a></p>
     </section>
 
+
+    <section id="day-resampling">
+      <h2>Does the matched July gap hold across different operating days?</h2>
+      <p>The July full-month ATL-origin minus other-origin on-time gap was <strong>−2.518 percentage points</strong> after matching selected destinations and scheduled origin-local departure periods. Excluding any one operating day left the gap negative, but a stronger stability check told a more cautious story: resampling whole days changed both which groups qualified for matching and the resulting gap.</p>
+      <div class="case-table-scroll" role="region" aria-label="July 2025 matched on-time gap resampling results" tabindex="0">
+        <table class="case-results-table">
+          <caption>July 2025 matched ATL-minus-other gap in percentage points. Empirical 5th–95th percentiles across 300 resamples per method; not confidence intervals.</caption>
+          <thead><tr><th scope="col">Day-resampling method</th><th scope="col">5th–95th percentile gap</th><th scope="col">Positive gaps</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Paired individual days</th><td>−5.226 to +0.644 pp</td><td>32 / 300</td></tr>
+            <tr><th scope="row">Noncircular 3-day blocks</th><td>−5.347 to +0.263 pp</td><td>26 / 300</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="case-table-note"><strong>Interpretation:</strong> both methods produced some positive July <em>matched, standardized</em> gaps, so the sign is not stable under the predeclared date-resampling procedures. This does <strong>not</strong> reverse the negative July <em>unadjusted, full-population</em> gap. The matched analysis excludes substantial portions of the reported flights, and the resampling percentiles are descriptive stability diagnostics, <strong>not statistical confidence intervals</strong>.</p>
+      <p><strong>Validation and decision:</strong> an independent SQLite implementation reproduced <strong>1,200</strong> resampled comparisons across January and July with zero disagreements. The two selected months, 31 observed operating days per month and assumptions of the three-day-block method cannot establish a causal ATL airport effect or justify a staffing, scheduling or dispatch intervention. I would use the result to set questions for broader validation, not make an operational change. <a class="case-inline-link" href="https://github.com/yumorepos/fleet-tracker/blob/main/docs/BTS_DAY_RESAMPLING_2025_RESULTS.md" target="_blank" rel="noopener noreferrer">Read the independently verified day-resampling results ↗</a></p>
+    </section>
+
     <section id="connections">
       <h2>Can we observe aircraft connections?</h2>
       <p>Gate times were checked against airport time zones, scheduled and actual elapsed times, and reported delays. A historical airport-code change created a concrete data-quality issue: PBI was missing from a current airport mapping even though the 2025 flights still used that code. I added one documented historical-code time-zone exception and repeated all clock checks.</p>
